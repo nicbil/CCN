@@ -1,0 +1,12 @@
+<div class="wrap-main-menu">
+  <div class="main-menu">
+    <a href="/">
+      <button mat-button>{{'lang_98' | translate}}</button>
+    </a>
+
+    <button mat-button [matMenuTriggerFor]="menu">{{'lang_97' | translate}}</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>{{'lang_75' | translate}}</button>
+    </mat-menu>
+  </div>
+</div>

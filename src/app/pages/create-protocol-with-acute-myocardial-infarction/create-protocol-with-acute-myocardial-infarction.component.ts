@@ -1,0 +1,115 @@
+import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
+
+@Component({
+  selector: 'app-create-protocol-with-acute-myocardial-infarction',
+  templateUrl: './create-protocol-with-acute-myocardial-infarction.component.html',
+  styleUrls: ['./create-protocol-with-acute-myocardial-infarction.component.sass'],
+  providers: [DatePipe]
+})
+export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnInit {
+  maskDate: any[] = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  maskTime: any[] = [/\d/, /\d/, ':', /\d/, /\d/];
+  maskDateTime: any[] = [/\d/, /\d/, ':', /\d/, /\d/, ' ', /\d/, /\d/, '\/', /\d/, /\d/, '\/', /\d/, /\d/, /\d/, /\d/];
+  maskPercentage: any[] = [/\d/, /\d/, /\d/];
+
+  patternPercentage = /^[0-9]|[0-2][0-9]|3[0-6]$/;
+  patternDate: any = /^(0[1-9]|[12][0-9]|3[01])[-](0[1-9]|1[012])[-](19|20)\d\d$/;
+  patternTime: any = /^(((([0-1][0-9])|(2[0-3])):?[0-5][0-9])|(24:?00))/;
+  patternTimeDate: any = /^(((([0-1][0-9])|(2[0-3])):?[0-5][0-9])|(24:?00)) (0[1-9]|[12][0-9]|3[01])[\/](0[1-9]|1[012])[\/](19|20)\d\d$/;
+
+  protocol: object = {
+    arrival_date: this.datePipe.transform(new Date(), 'dd-MM-yyyy'),
+    arrival_time: this.datePipe.transform(new Date(), 'H:mm'),
+    first_name: '',
+    last_name: '',
+    patronymic: '',
+    birthday_date: '',
+    gender: 'man',
+    delivered_smp: '',
+    delivered_yourself: '',
+    killip_type: '',
+    effect_of_thrombolysis: 'no',
+    thrombolysis: {
+      type: 'no',
+      data: {}
+    },
+    ecg: {
+      front_rise: '',
+      lateral_rise: '',
+      lower_rise: '',
+      other: ''
+    },
+    time_intervals: {
+      time_intervals_vertical_count: ['onsetOfSymptoms', 'firstMedicalContact', 'ecg', 'enteringTheHospital',
+        'ecgInTheHospital', 'fibrinolysisOrThrombolysis', 'arrivalInAngiography', 'restoringBloodFlow'],
+      type: {
+        time: {},
+        not_determined: {},
+        date: {}
+      },
+    },
+    continuing_pain: 'no',
+    increase_segment_st: 'no',
+    thrombaspiration: 'thrombus_not_received',
+    blood_timi_before: '1',
+    blood_timi_after: '1',
+    stenosis_diameter_ica_before_chkv: '',
+    stenosis_diameter_ica_after_chkv: '',
+    additionally: {},
+    type_interventions: {},
+    operator: '',
+    date_time_death: '',
+    lka: {
+      lkaHorizontalCount: ['', 'lang_88', 'lang_89', 'lang_81', 'lang_82', 'lang_83', 'lang_86', 'lang_81', 'lang_82', '', '', ''],
+      lkaVerticalCount: ['percent', 'b', 'cm', 'cl', 'cb', 'timiAfter', 'timiBefore'],
+      types: {
+        percent: [],
+        b: [],
+        cm: [],
+        cl: [],
+        cb: [],
+        timiAfter: [],
+        timiBefore: []
+      }
+    },
+    pka: {
+      pkaHorizontalCount: ['lang_9', 'lang_81', 'lang_82', 'lang_83', 'lang_84', 'lang_85', 'lang_86', 'lang_87'],
+      pkaVerticalCount: ['percent', 'b', 'cm', 'cl', 'cb', 'timiAfter', 'timiBefore'],
+      types: {
+        percent: [],
+        b: [],
+        cm: [],
+        cl: [],
+        cb: [],
+        timiAfter: [],
+        timiBefore: []
+      }
+    },
+    lvg: {
+      lvgHorizontalCount: ['lang_10', 'lang_76', 'lang_77', 'lang_78', 'lang_79', 'lang_80'],
+      lvgVerticalCount: ['normakinez', 'gipokinez', 'akinez', 'diskinez'],
+      types: {
+        normakinez: [],
+        gipokinez: [],
+        akinez: [],
+        diskinez: [],
+      }
+    },
+  };
+  warning_message: boolean = false;
+  constructor(private datePipe: DatePipe) {}
+
+  ngOnInit() {
+    console.log();
+  }
+
+  send(form) {
+    this.warning_message = false;
+    if (form.valid) {
+      console.log(form);
+    } else {
+      this.warning_message = true;
+    }
+  }
+}

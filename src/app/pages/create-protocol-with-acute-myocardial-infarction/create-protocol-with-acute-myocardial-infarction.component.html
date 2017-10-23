@@ -1,0 +1,392 @@
+<app-main-menu></app-main-menu>
+<div class="wrap-block">
+  <div class="title-head">{{'lang_96' | translate}}</div>
+
+    <form class="wrap-form" #protocolForm="ngForm" (ngSubmit)="send(protocolForm)">
+    <div>
+      <div>
+        <mat-form-field class="wrap-date">
+          <input matInput [(ngModel)]='protocol.arrival_date' id="arrival_date" name="arrival_date" #arrival_date="ngModel" placeholder="{{'lang_36' | translate}}"
+            [textMask]="{mask: maskDate}"
+            [pattern]="patternDate">
+        </mat-form-field>
+
+        <mat-form-field class="wrap-time">
+          <input matInput name="arrival_time" [(ngModel)]="protocol.arrival_time" minlength="4"
+             #arrival_time="ngModel" placeholder="{{'lang_37' | translate}}"
+            [pattern]="patternTime"
+            [textMask]="{mask: maskTime}" required>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="">
+        <input matInput [(ngModel)]="protocol.first_name" name="first_name" placeholder="{{'lang_38' | translate}}">
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <input matInput [(ngModel)]="protocol.last_name" name="last_name" placeholder="{{'lang_39' | translate}}">
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <input matInput [(ngModel)]="protocol.patronymic" name="patronymic" placeholder="{{'lang_40' | translate}}">
+      </mat-form-field>
+
+      <mat-form-field class="wrap-date">
+        <input matInput [(ngModel)]='protocol.birthday_date' name="birthday_date" placeholder="{{'lang_35' | translate}}"
+         [textMask]="{mask: maskDate}"
+         [pattern]="patternDate">
+      </mat-form-field>
+
+      <mat-radio-group class="wrap-gender" [(ngModel)]='protocol.gender' name="gender">
+        <mat-radio-button value="man" checked>{{'lang_41' | translate}}</mat-radio-button>
+        <mat-radio-button value="woman">{{'lang_42' | translate}}</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-form-field class="">
+        <input matInput [(ngModel)]='protocol.delivered_smp' name="delivered_smp" placeholder="{{'lang_20' | translate}}">
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <input matInput [(ngModel)]='protocol.delivered_yourself' name="delivered_yourself" placeholder="{{'lang_21' | translate}}">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="{{'lang_43' | translate}}" [(ngModel)] = "protocol.killip_type" name="killip_type">
+          <mat-option value="1">{{'lang_44' | translate}}</mat-option>
+          <mat-option value="2">{{'lang_45' | translate}}</mat-option>
+          <mat-option value="3">{{'lang_46' | translate}}</mat-option>
+          <mat-option value="4">{{'lang_47' | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div style="display: flex">
+        <div class="wrap-radio">
+          <div class="title">{{'lang_54' | translate}}</div>
+          <mat-radio-group class="" [(ngModel)]='protocol.effect_of_thrombolysis' name="effect_of_thrombolysis">
+            <mat-radio-button value="no" checked>{{'lang_55' | translate}}</mat-radio-button>
+            <mat-radio-button value="yes">{{'lang_56' | translate}}</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="wrap-radio">
+          <div>
+            <div class="title">{{'lang_48' | translate}}</div>
+            <mat-radio-group [(ngModel)]='protocol.thrombolysis.type' name="thrombolysis" (click)="protocol.thrombolysis.data = {}">
+              <mat-radio-button value="no" checked>{{'lang_49' | translate}}</mat-radio-button>
+              <mat-radio-button value="yes">{{'lang_50' | translate}}</mat-radio-button>
+              <mat-radio-button value="contraindicated">{{'lang_51' | translate}}</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <div class="sub-group-of-thrombolysis">
+            <ng-container *ngIf="protocol.thrombolysis.type === 'no'"></ng-container>
+
+            <ng-container *ngIf="protocol.thrombolysis.type === 'yes'">
+              <mat-form-field class="">
+                <input matInput [(ngModel)]="protocol.thrombolysis.data.time" name="thrombolysis_time"
+                 [pattern]="patternTime"
+                 [textMask]="{mask: maskTime}"
+                 placeholder="{{'lang_52' | translate}}">
+              </mat-form-field>
+
+              <mat-form-field class="">
+                <input matInput [(ngModel)]="protocol.thrombolysis.data.drug" name="thrombolysis_drug" placeholder="{{'lang_53' | translate}}">
+              </mat-form-field>
+            </ng-container>
+
+            <ng-container *ngIf="protocol.thrombolysis.type === 'contraindicated'">
+              <mat-form-field>
+                <input matInput [(ngModel)]="protocol.thrombolysis.data.cause" name="thrombolysis_cause" placeholder="{{'lang_99' | translate}}">
+              </mat-form-field>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="title">{{'ecg' | translate}}</div>
+        <mat-form-field>
+          <mat-select placeholder="{{'lang_57' | translate}}" [(ngModel)] = "protocol.ecg.front_rise" name="frontRise">
+            <mat-option></mat-option>
+            <mat-option value="v1">{{'lang_62' | translate}}</mat-option>
+            <mat-option value="v2">{{'lang_63' | translate}}</mat-option>
+            <mat-option value="v3">{{'lang_64' | translate}}</mat-option>
+            <mat-option value="v4">{{'lang_65' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="{{'lang_58' | translate}}" [(ngModel)] = "protocol.ecg.lateral_rise" name="lateralRise">
+            <mat-option></mat-option>
+            <mat-option value="i">{{'lang_66' | translate}}</mat-option>
+            <mat-option value="avl">{{'lang_67' | translate}}</mat-option>
+            <mat-option value="v5">{{'lang_68' | translate}}</mat-option>
+            <mat-option value="v6">{{'lang_69' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="{{'lang_59' | translate}}" [(ngModel)] = "protocol.ecg.lower_rise" name="LowerRise">
+            <mat-option></mat-option>
+            <mat-option value="Ⅱ">&#8545;</mat-option>
+            <mat-option value="Ⅲ">&#8546;</mat-option>
+            <mat-option value="avf">{{'lang_72' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="">
+          <input matInput [(ngModel)]="protocol.ecg.other" name="ecg_other" placeholder="{{'lang_73' | translate}}">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <table class="table table-time-intervals">
+      <thead>
+        <tr>
+          <th colspan="4">{{'lang_31' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let timeIntervalsVC of protocol.time_intervals.time_intervals_vertical_count; let horizontalI = index;">
+        <td>
+          <ng-container>
+            {{timeIntervalsVC | translate}}
+          </ng-container>
+        </td>
+        <td>
+          <mat-form-field class="wrap-date">
+            <input matInput [(ngModel)]='protocol.time_intervals.type.date[horizontalI]'
+             name="timeIntervalsDate{{horizontalI}}"
+             [textMask]="{mask: maskDate}"
+             [pattern]="patternDate"
+             placeholder="{{'lang_32' | translate}}">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="wrap-time">
+            <input matInput [(ngModel)]="protocol.time_intervals.type.time[horizontalI]"
+               name="timeIntervalsTime{{horizontalI}}"
+               [pattern]="patternTime"
+               [textMask]="{mask: maskTime}"
+               placeholder="{{'lang_33' | translate}}">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="cant-determined">
+            <input matInput [(ngModel)]="protocol.time_intervals.type.not_determined[horizontalI]"
+              name="timeIntervals_not_determined"
+              placeholder="{{'lang_34' | translate}}">
+          </mat-form-field>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="wrap-row" style="display: flex;">
+      <div class="">
+        <div class="title">{{'lang_23' | translate}}</div>
+        <mat-radio-group class="radios" [(ngModel)]='protocol.continuing_pain' name="continuing_pain">
+          <mat-radio-button value="no">{{'lang_25' | translate}}</mat-radio-button>
+          <mat-radio-button value="yes">{{'lang_24' | translate}}</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="">
+        <div class="title">{{'lang_26' | translate}}</div>
+        <mat-radio-group class="radios" [(ngModel)]='protocol.increase_segment_st' name="increase_segment_st">
+          <mat-radio-button value="no">{{'lang_25' | translate}}</mat-radio-button>
+          <mat-radio-button value="yes">{{'lang_24' | translate}}</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="h-row wrap-thrombaspiration">
+      <div class="title">{{'lang_27' | translate}}</div>
+      <mat-radio-group class="radios" [(ngModel)]='protocol.thrombaspiration' name="thrombaspiration">
+        <mat-radio-button value="thrombus_not_received">{{'lang_29' | translate}}</mat-radio-button>
+        <mat-radio-button value="thrombus_received">{{'lang_28' | translate}}</mat-radio-button>
+        <mat-radio-button value="failed">{{'lang_30' | translate}}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="group wrap-row">
+      <div>
+        <div class="title">{{'lang_22' | translate}}</div>
+        <mat-radio-group class="radios" [(ngModel)]='protocol.blood_timi_before' name="blood_timi_before">
+          <mat-radio-button value="1">&#8544;</mat-radio-button>
+          <mat-radio-button value="2">&#8545;</mat-radio-button>
+          <mat-radio-button value="3">&#8546;</mat-radio-button>
+          <mat-radio-button value="4">&#8547;</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div>
+        <div class="title">{{'lang_17' | translate}}</div>
+        <mat-radio-group class="radios" [(ngModel)]='protocol.blood_timi_after' name="blood_timi_after">
+          <mat-radio-button value="1">&#8544;</mat-radio-button>
+          <mat-radio-button value="2">&#8545;</mat-radio-button>
+          <mat-radio-button value="3">&#8546;</mat-radio-button>
+          <mat-radio-button value="4">&#8547;</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div>
+        <mat-form-field class="">
+          <input matInput placeholder="{{'lang_18' | translate}}" class="input" [min]="1" [max]="100"
+           [pattern]="patternPercentage"
+           [(ngModel)]="protocol.stenosis_diameter_ica_before_chkv"
+           name="stenosis_diameter_ica_before_chkv">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="">
+          <input matInput placeholder="{{'lang_19' | translate}}" class="input" [min]="1" [max]="100"
+            [pattern]="patternPercentage"
+            [(ngModel)]="protocol.stenosis_diameter_ica_after_chkv"
+             name="stenosis_diameter_ica_after_chkv">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="title-table">{{'lang_11' | translate}}</div>
+    <div class="wrap-additionally wrap-row">
+      <mat-checkbox [(ngModel)]="protocol.additionally['ivl']" name="kindInterventions0">
+        {{'lang_12' | translate}}
+      </mat-checkbox>
+      <mat-checkbox [(ngModel)]="protocol.additionally['vabk']" name="kindInterventions1}}">
+        {{'lang_13' | translate}}
+      </mat-checkbox>
+      <mat-checkbox [(ngModel)]="protocol.additionally['inotropic_support']" name="kindInterventions2}}">
+        {{'lang_14' | translate}}
+      </mat-checkbox>
+      <mat-checkbox [(ngModel)]="protocol.additionally['eks']" name="kindInterventions3}}">
+        {{'lang_15' | translate}}
+      </mat-checkbox>
+      <mat-checkbox [(ngModel)]="protocol.additionally['cardioversion']" name="kindInterventions4}}">
+        {{'lang_16' | translate}}
+      </mat-checkbox>
+    </div>
+
+    <div class="title-table">{{'lang_5' | translate}}</div>
+    <div class="wrap-kind-interventions">
+      <div class="block-checkboxs">
+        <div class="block">
+          <mat-checkbox [(ngModel)]="protocol.type_interventions['0']" name="type_interventions_0">
+            {{'lang_0' | translate}}
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="protocol.type_interventions['1']" name="type_interventions_1">
+            {{'lang_1' | translate}}
+          </mat-checkbox>
+        </div>
+        <div class="block">
+          <mat-checkbox [(ngModel)]="protocol.type_interventions['2']" name="type_interventions_2">
+            {{'lang_2' | translate}}
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="protocol.type_interventions['3']" name="type_interventions_3">
+            {{'lang_3' | translate}}
+          </mat-checkbox>
+        </div>
+        <div class="block">
+          <mat-checkbox [(ngModel)]="protocol.type_interventions['4']" name="type_interventions_4">
+            {{'lang_4' | translate}}
+          </mat-checkbox>
+        </div>
+      </div>
+
+      <div>
+        <mat-form-field class="wrap-date">
+          <input matInput [(ngModel)]='protocol.date_time_death' name="date_time_death" placeholder="{{'lang_6' | translate}}"
+           [textMask]="{mask: maskDateTime}"
+           [pattern]="patternTimeDate">
+        </mat-form-field>
+
+        <mat-form-field style="width: 75%">
+          <textarea matInput placeholder="{{'lang_7' | translate}}" [(ngModel)]="protocol.operator"
+            name="operator"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <table class="table table-lka">
+      <thead>
+        <tr>
+          <th>{{'lang_8' | translate}}</th>
+          <th colspan="2">{{'lang_90' | translate}}</th>
+          <th colspan="4">{{'lang_91' | translate}}</th>
+          <th colspan="2">{{'lang_92' | translate}}</th>
+          <th>{{'lang_93' | translate}}</th>
+          <th>{{'lang_94' | translate}}</th>
+          <th>{{'lang_95' | translate}}</th>
+        </tr>
+        <tr>
+          <th *ngFor="let lkaHC of protocol.lka.lkaHorizontalCount;">{{lkaHC | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let lkaVC of protocol.lka.lkaVerticalCount; let horizontalI = index;">
+        <td *ngFor="let lkaHC of protocol.lka.lkaHorizontalCount; let verticalI = index;">
+          <ng-container *ngIf="!verticalI">
+            {{lkaVC | translate}}
+          </ng-container>
+
+          <ng-container *ngIf="verticalI">
+            <input placeholder="{{'lang_74' | translate}}" class="input" [min]="1" [max]="100"
+             [pattern]="patternPercentage"
+             [(ngModel)]="protocol.lka.types[lkaVC][verticalI-1]"
+             name="{{lkaVC+verticalI}}">
+          </ng-container>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-pka">
+      <thead>
+      <tr>
+        <th *ngFor="let pkaHC of protocol.pka.pkaHorizontalCount;">{{pkaHC | translate}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let pkaVC of protocol.pka.pkaVerticalCount; let horizontalI = index;">
+        <td *ngFor="let pkaHC of protocol.pka.pkaHorizontalCount; let verticalI = index;">
+          <ng-container *ngIf="!verticalI">
+            {{pkaVC | translate}}
+          </ng-container>
+
+          <input *ngIf="verticalI" placeholder="{{'lang_74' | translate}}" class="input" [min]="1" [max]="100"
+           [pattern]="patternPercentage"
+           [(ngModel)]="protocol.pka.types[pkaVC][verticalI-1]"
+           name="{{pkaVC+verticalI}}">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-lvg">
+      <thead>
+        <tr>
+          <th *ngFor="let lvgHC of protocol.lvg.lvgHorizontalCount;">{{lvgHC | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let lvgVC of protocol.lvg.lvgVerticalCount; let horizontalI = index;">
+        <td *ngFor="let lvgHC of protocol.lvg.lvgHorizontalCount; let verticalI = index;">
+          <ng-container *ngIf="!verticalI">
+            {{lvgVC | translate}}
+          </ng-container>
+
+          <input *ngIf="verticalI" placeholder="{{'lang_74' | translate}}" class="input" [min]="1" [max]="100"
+           [(ngModel)]="protocol.lvg.types[lvgVC][verticalI-1]"
+           [pattern]="patternPercentage"
+           name="{{lvgVC+verticalI}}">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <button [ngClass]="['save-button', protocolForm.valid ? 'valid' : 'novalid']">{{'lang_100' | translate}}</button>
+  </form>
+  <!--{{form | json}}-->
+</div>
+
+<div class="alert alert-danger alert-dismissible" *ngIf="warning_message">
+  <a class="close" (click)="warning_message = false">&times;</a>
+  <strong>{{'lang_102' | translate}} </strong> {{'lang_101' | translate}}
+</div>

@@ -1,7 +1,7 @@
 export const LANG_RU_NAME = 'ru';
 
 export const LANG_RU_TRANS = {
-  'normakinez': 'Нормакинез',
+  'normakinez': 'Нормокинез',
   'gipokinez': 'Гипокинез',
   'akinez': 'Акинез',
   'diskinez': 'Дискинез',
@@ -123,4 +123,6 @@ export const LANG_RU_TRANS = {
   'lang_100': 'Сохранить',
   'lang_101': 'У Вас есть обязательные данные для заполнение или данные, которые Вы ввели не коректно.',
   'lang_102': 'Ошибка!',
+  'lang_103': 'Сохранение',
+  'lang_104': 'Протокол успешно сохранился',
 };

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule, routingComponents } from './app.routing';
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
   ],
   imports: [
     NgbModule.forRoot(),
+    HttpModule,
     NgDatepickerModule,
     AppRoutingModule,
     FormsModule,

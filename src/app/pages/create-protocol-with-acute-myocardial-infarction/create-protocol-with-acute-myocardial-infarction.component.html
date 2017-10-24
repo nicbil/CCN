@@ -2,7 +2,7 @@
 <div class="wrap-block">
   <div class="title-head">{{'lang_96' | translate}}</div>
 
-    <form class="wrap-form" #protocolForm="ngForm" (ngSubmit)="send(protocolForm)">
+  <form class="wrap-form" #protocolForm="ngForm" (ngSubmit)="send(protocolForm)">
     <div>
       <div>
         <mat-form-field class="wrap-date">
@@ -19,7 +19,7 @@
         </mat-form-field>
       </div>
 
-      <mat-form-field class="">
+      <mat-form-field>
         <input matInput [(ngModel)]="protocol.first_name" name="first_name" placeholder="{{'lang_38' | translate}}">
       </mat-form-field>
 
@@ -147,7 +147,7 @@
         </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let timeIntervalsVC of protocol.time_intervals.time_intervals_vertical_count; let horizontalI = index;">
+      <tr *ngFor="let timeIntervalsVC of tables.time_intervals_vertical_count; let horizontalI = index;">
         <td>
           <ng-container>
             {{timeIntervalsVC | translate}}
@@ -155,7 +155,7 @@
         </td>
         <td>
           <mat-form-field class="wrap-date">
-            <input matInput [(ngModel)]='protocol.time_intervals.type.date[horizontalI]'
+            <input matInput [(ngModel)]='protocol.time_intervals.date[horizontalI]'
              name="timeIntervalsDate{{horizontalI}}"
              [textMask]="{mask: maskDate}"
              [pattern]="patternDate"
@@ -164,7 +164,7 @@
         </td>
         <td>
           <mat-form-field class="wrap-time">
-            <input matInput [(ngModel)]="protocol.time_intervals.type.time[horizontalI]"
+            <input matInput [(ngModel)]="protocol.time_intervals.time[horizontalI]"
                name="timeIntervalsTime{{horizontalI}}"
                [pattern]="patternTime"
                [textMask]="{mask: maskTime}"
@@ -173,7 +173,7 @@
         </td>
         <td>
           <mat-form-field class="cant-determined">
-            <input matInput [(ngModel)]="protocol.time_intervals.type.not_determined[horizontalI]"
+            <input matInput [(ngModel)]="protocol.time_intervals.not_determined[horizontalI]"
               name="timeIntervals_not_determined"
               placeholder="{{'lang_34' | translate}}">
           </mat-form-field>
@@ -246,6 +246,7 @@
     </div>
 
     <div class="title-table">{{'lang_11' | translate}}</div>
+
     <div class="wrap-additionally wrap-row">
       <mat-checkbox [(ngModel)]="protocol.additionally['ivl']" name="kindInterventions0">
         {{'lang_12' | translate}}
@@ -265,6 +266,7 @@
     </div>
 
     <div class="title-table">{{'lang_5' | translate}}</div>
+
     <div class="wrap-kind-interventions">
       <div class="block-checkboxs">
         <div class="block">
@@ -316,12 +318,12 @@
           <th>{{'lang_95' | translate}}</th>
         </tr>
         <tr>
-          <th *ngFor="let lkaHC of protocol.lka.lkaHorizontalCount;">{{lkaHC | translate}}</th>
+          <th *ngFor="let lkaHC of tables.lkaHorizontalCount;">{{lkaHC | translate}}</th>
         </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let lkaVC of protocol.lka.lkaVerticalCount; let horizontalI = index;">
-        <td *ngFor="let lkaHC of protocol.lka.lkaHorizontalCount; let verticalI = index;">
+      <tr *ngFor="let lkaVC of tables.lkaVerticalCount; let horizontalI = index;">
+        <td *ngFor="let lkaHC of tables.lkaHorizontalCount; let verticalI = index;">
           <ng-container *ngIf="!verticalI">
             {{lkaVC | translate}}
           </ng-container>
@@ -329,7 +331,7 @@
           <ng-container *ngIf="verticalI">
             <input placeholder="{{'lang_74' | translate}}" class="input" [min]="1" [max]="100"
              [pattern]="patternPercentage"
-             [(ngModel)]="protocol.lka.types[lkaVC][verticalI-1]"
+             [(ngModel)]="protocol.lka[lkaVC][verticalI-1]"
              name="{{lkaVC+verticalI}}">
           </ng-container>
         </td>
@@ -340,19 +342,19 @@
     <table class="table table-pka">
       <thead>
       <tr>
-        <th *ngFor="let pkaHC of protocol.pka.pkaHorizontalCount;">{{pkaHC | translate}}</th>
+        <th *ngFor="let pkaHC of tables.pkaHorizontalCount;">{{pkaHC | translate}}</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let pkaVC of protocol.pka.pkaVerticalCount; let horizontalI = index;">
-        <td *ngFor="let pkaHC of protocol.pka.pkaHorizontalCount; let verticalI = index;">
+      <tr *ngFor="let pkaVC of tables.pkaVerticalCount; let horizontalI = index;">
+        <td *ngFor="let pkaHC of tables.pkaHorizontalCount; let verticalI = index;">
           <ng-container *ngIf="!verticalI">
             {{pkaVC | translate}}
           </ng-container>
 
           <input *ngIf="verticalI" placeholder="{{'lang_74' | translate}}" class="input" [min]="1" [max]="100"
            [pattern]="patternPercentage"
-           [(ngModel)]="protocol.pka.types[pkaVC][verticalI-1]"
+           [(ngModel)]="protocol.pka[pkaVC][verticalI-1]"
            name="{{pkaVC+verticalI}}">
         </td>
       </tr>
@@ -362,18 +364,18 @@
     <table class="table table-lvg">
       <thead>
         <tr>
-          <th *ngFor="let lvgHC of protocol.lvg.lvgHorizontalCount;">{{lvgHC | translate}}</th>
+          <th *ngFor="let lvgHC of tables.lvgHorizontalCount;">{{lvgHC | translate}}</th>
         </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let lvgVC of protocol.lvg.lvgVerticalCount; let horizontalI = index;">
-        <td *ngFor="let lvgHC of protocol.lvg.lvgHorizontalCount; let verticalI = index;">
+      <tr *ngFor="let lvgVC of tables.lvgVerticalCount; let horizontalI = index;">
+        <td *ngFor="let lvgHC of tables.lvgHorizontalCount; let verticalI = index;">
           <ng-container *ngIf="!verticalI">
             {{lvgVC | translate}}
           </ng-container>
 
           <input *ngIf="verticalI" placeholder="{{'lang_74' | translate}}" class="input" [min]="1" [max]="100"
-           [(ngModel)]="protocol.lvg.types[lvgVC][verticalI-1]"
+           [(ngModel)]="protocol.lvg[lvgVC][verticalI-1]"
            [pattern]="patternPercentage"
            name="{{lvgVC+verticalI}}">
         </td>
@@ -383,10 +385,14 @@
 
     <button [ngClass]="['save-button', protocolForm.valid ? 'valid' : 'novalid']">{{'lang_100' | translate}}</button>
   </form>
-  <!--{{form | json}}-->
 </div>
 
-<div class="alert alert-danger alert-dismissible" *ngIf="warning_message">
-  <a class="close" (click)="warning_message = false">&times;</a>
+<div class="alert alert-danger alert-dismissible" *ngIf="warning_save">
+  <a class="close" (click)="warning_save = false">&times;</a>
   <strong>{{'lang_102' | translate}} </strong> {{'lang_101' | translate}}
+</div>
+
+<div class="alert alert-success alert-dismissible" *ngIf="succes_save">
+  <a class="close" (click)="succes_save = false">&times;</a>
+  <strong>{{'lang_103' | translate}} </strong> {{'lang_104' | translate}}
 </div>

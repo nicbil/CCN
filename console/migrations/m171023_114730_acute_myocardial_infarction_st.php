@@ -12,7 +12,7 @@ class m171023_114730_acute_myocardial_infarction_st extends Migration
         }
 
         $this->createTable('{{%acute_myocardial_infarction_st}}', [
-            'id' => 'int(11) PRIMARY KEY',
+            'id' => 'int(11) PRIMARY KEY AUTO_INCREMENT',
             'arrival_date' => 'date DEFAULT NULL',
             'arrival_time' => 'time NOT NULL',
             'first_name' => 'varchar(100) NOT NULL',
@@ -22,7 +22,7 @@ class m171023_114730_acute_myocardial_infarction_st extends Migration
             'gender' => "enum('man','woman','','') NOT NULL",
             'delivered_smp' => 'text NOT NULL',
             'delivered_yourself' => 'text NOT NULL',
-            'killip_type' => 'int(2) NOT NULL',
+            'killip_type' => 'varchar(2) NOT NULL',
             'effect_of_thrombolysis' => "enum('no','yes','','') NOT NULL",
             'thrombolysis' => 'text NOT NULL',
             'ecg' => 'text NOT NULL',
@@ -30,10 +30,10 @@ class m171023_114730_acute_myocardial_infarction_st extends Migration
             'continuing_pain' => "enum('no','yes','','') NOT NULL",
             'increase_segment_st' => "enum('no','yes','','') NOT NULL",
             'thrombaspiration' => "enum('thrombus_not_received','thrombus_received','failed','') NOT NULL",
-            'blood_timi_before' => 'int(2) NOT NULL',
-            'blood_timi_after' => 'int(2) NOT NULL',
-            'stenosis_diameter_ica_before_chkv' => 'int(3) NOT NULL',
-            'stenosis_diameter_ica_after_chkv' => 'int(3) NOT NULL',
+            'blood_timi_before' => 'varchar(2) NOT NULL',
+            'blood_timi_after' => 'varchar(2) NOT NULL',
+            'stenosis_diameter_ica_before_chkv' => 'varchar(2) NOT NULL',
+            'stenosis_diameter_ica_after_chkv' => 'varchar(2) NOT NULL',
             'additionally' => 'text NOT NULL',
             'type_interventions' => 'text NOT NULL',
             'lka' => 'text NOT NULL',

@@ -1,128 +1,122 @@
-.wrap-block
-  width: 1000px
-  min-height: 500px
-  margin: 0 auto
-  margin-top: 65px
-  margin-bottom: 70px
+.wrap-form
+  margin-top: 20px
 
-  .wrap-form
-    margin-top: 20px
+  .wrap-radio
+    margin: 0px 20px 10px 0px
 
-    .wrap-radio
-      margin: 0px 20px 10px 0px
+    .sub-group-of-thrombolysis
+      margin-top: 10px
 
-      .sub-group-of-thrombolysis
-        margin-top: 10px
-
-    .wrap-kind-interventions
-      .block-checkboxs
-        display: flex
-        justify-content: space-between
-
-        .block
-          display: flex
-          flex-direction: column
-
-    .wrap-additionally
-      display: flex
-      flex-flow: column wrap
-
-    .group
+  .wrap-kind-interventions
+    .block-checkboxs
       display: flex
       justify-content: space-between
-      .radios
+      flex-wrap: wrap
 
-    .title-table
-      font-weight: bold
-      margin: 10px 0px 10px 0px
+      .block
+        display: flex
+        flex-direction: column
 
-    .table
-      width: auto
+  .wrap-additionally
+    display: flex
+    flex-flow: column wrap
 
-      td
-        text-align: center
-      th
-        color: #fff
-        background-color: #337ab7
-        font-size: 12px
-        line-height: 13px
+  .group
+    display: flex
+    justify-content: space-between
+    flex-wrap: wrap
 
-      .text-left
-        text-align: left
+  .title-table
+    font-weight: bold
+    margin: 10px 0px 10px 0px
 
-    .table-lka
-      .ng-invalid
-        border-bottom: 1px solid red
+  .table
+    width: auto
 
-      tbody
-        tr
-          td:first-child
-            text-align: left
-            padding-right: 15px
-            font-size: 12px
-            font-weight: bold
+    td
+      text-align: center
+    th
+      color: #fff
+      background-color: #337ab7
+      font-size: 12px
+      line-height: 13px
 
-    .table-pka
-      .ng-invalid
-        border-bottom: 1px solid red
+    .text-left
+      text-align: left
 
-      tbody
-        tr
-          td:first-child
-            text-align: left
-            padding-right: 15px
-            font-size: 12px
-            font-weight: bold
+  .table-lka
+    .ng-invalid
+      border-bottom: 1px solid red
 
-    .table-lvg
-      .ng-invalid
-        border-bottom: 1px solid red
+    tbody
+      tr
+        td:first-child
+          text-align: left
+          padding-right: 15px
+          font-size: 12px
+          font-weight: bold
 
-      tbody
-        tr
-          td:first-child
-            text-align: left
-            padding-right: 15px
-            font-size: 12px
-            font-weight: bold
+  .table-pka
+    .ng-invalid
+      border-bottom: 1px solid red
 
-    .table-lka
-      th
-        text-align: center
-        border-right: 1px solid #ddd
-        border-top: 1px solid #ddd
+    tbody
+      tr
+        td:first-child
+          text-align: left
+          padding-right: 15px
+          font-size: 12px
+          font-weight: bold
 
-    .table-time-intervals
-      td
-        text-align: center
+  .table-lvg
+    .ng-invalid
+      border-bottom: 1px solid red
 
-      td:first-child
-        text-align: left
+    tbody
+      tr
+        td:first-child
+          text-align: left
+          padding-right: 15px
+          font-size: 12px
+          font-weight: bold
 
-      td
-        padding: 0px
-        vertical-align: middle
+  .table-lka
+    th
+      text-align: center
+      border-right: 1px solid #ddd
+      border-top: 1px solid #ddd
 
-      tbody
-        tr
-          td
-            padding-right: 15px
+  .table-time-intervals
+    td
+      text-align: center
 
-          td:first-child
-            width: 115px
-            font-size: 12px
-            font-weight: bold
+    td:first-child
+      text-align: left
 
-      .wrap-date
-        width: 72px
-        margin: 0
+    td
+      padding: 0px
+      vertical-align: middle
 
-      .wrap-time
-        width: 35px
-        margin: 0
+    tbody
+      tr
+        td
+          padding-right: 15px
 
-      .cant-determined
-        margin: 0
+        td:first-child
+          width: 115px
+          font-size: 12px
+          font-weight: bold
+
+    .wrap-date
+      width: 72px
+      margin: 0
+
+    .wrap-time
+      width: 35px
+      margin: 0
+
+    .cant-determined
+      margin: 0
 
 .wrap-ngb-datepicker
   width: 90px
@@ -144,10 +138,30 @@
   border: 0
   padding: 8px 14px
   border-radius: 5px
-  float: right
   outline: none
-
-.valid
   background-color: #337ab7
   color: white
   cursor: pointer
+
+.table-lvg, .table-pka, .table-lka
+  input::placeholder
+    font-size: 11px
+    color: rgba(0,0,0,.54)
+
+.wrap-footer
+  width: 100%
+  height: 50px
+  position: fixed
+  bottom: 0
+  background-color: black
+
+  .footer
+    max-width: 1000px
+    height: 50px
+    display: flex
+    margin: 0 auto
+    align-items: center
+    justify-content: flex-end
+
+.hide
+  display: none

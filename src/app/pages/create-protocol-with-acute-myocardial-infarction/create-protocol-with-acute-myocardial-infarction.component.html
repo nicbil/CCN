@@ -1,5 +1,5 @@
 <app-main-menu></app-main-menu>
-<div class="wrap-block">
+<div class="wrap-body">
   <div class="title-head">{{'lang_96' | translate}}</div>
 
   <form class="wrap-form" #protocolForm="ngForm" (ngSubmit)="send(protocolForm)">
@@ -382,9 +382,13 @@
       </tr>
       </tbody>
     </table>
-
-    <button [ngClass]="['save-button', protocolForm.valid ? 'valid' : 'novalid']">{{'lang_100' | translate}}</button>
   </form>
+</div>
+
+<div class="wrap-footer" [ngClass]="[protocolForm.valid ? '' : 'hide']">
+  <div class="footer">
+    <button class='save-button' (click)="send(protocolForm)">{{'lang_100' | translate}}</button>
+  </div>
 </div>
 
 <div class="alert alert-danger alert-dismissible" *ngIf="warning_save">

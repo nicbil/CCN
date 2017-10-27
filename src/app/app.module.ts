@@ -16,6 +16,7 @@ import { IndexComponent } from './pages/index/index.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgDatepickerModule } from 'ng2-datepicker';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
     MatSelectModule,
     TextMaskModule,
     CustomFormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   bootstrap: [AppComponent],
   providers: [ TRANSLATION_PROVIDERS, TranslateService ]

@@ -7,6 +7,6 @@ php init --env=Production --overwrite=All
 #composer global remove "fxp/composer-asset-plugin"
 composer clear-cache
 #rm -rf ~/.composer
-composer self-update
+#composer self-update
 composer global require "fxp/composer-asset-plugin:*"
-composer install
+#composer install

@@ -6,7 +6,7 @@ php yii migrate/up --interactive=0
 #php yii cache/flush-schema --interactive=0
 composer global remove "fxp/composer-asset-plugin"
 composer clear-cache
-rm -rf ~/.composer
+#rm -rf ~/.composer
 composer self-update
 composer global require "fxp/composer-asset-plugin:*"
 composer install

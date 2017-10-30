@@ -48,21 +48,19 @@ class ApiController extends ActiveController {
 
   public function actionCreate_protocol_infarction_st() {
     $post = json_decode(trim(file_get_contents('php://input')), true);
-    $post['arrival_date'] = !empty($post['arrival_date']) ?
-      \Yii::$app->formatter->asDate($post['arrival_date'], 'php:Y-m-d') : '00-00-00';
-
     $post['birthday_date'] = !empty($post['birthday_date']) ?
       \Yii::$app->formatter->asDate($post['birthday_date'], 'php:Y-m-d') : '00-00-00';
 
-    $post['arrival_time'] = !empty($post['arrival_time']) ? $post['arrival_time'].':00' : '';
-
-    if(!empty($post['date_time_death'])) {
-      $date_time_death = explode(' ', $post['date_time_death']);
-      $post['date_time_death'] = \Yii::$app->formatter->asDate($date_time_death[1], 'php:Y-m-d') . ' ' .
-        $date_time_death[0] . ':00';
-    } else {
-      $post['date_time_death'] = '00:00:00 00-00-0000';
+    foreach (['date_and_time_of_arrival', 'date_time_death'] as $field) {
+      if(!empty($post[$field])) {
+        $date_time = explode(' ', $post[$field]);
+        $post[$field] = \Yii::$app->formatter->asDate($date_time[1], 'php:Y-m-d') . ' ' .
+          $date_time[0] . ':00';
+      } else {
+        $post[$field] = '00:00:00 00-00-0000';
+      }
     }
+
 
     //print_r($post); die();
     $model = new AcuteMyocardialInfarctionSt();

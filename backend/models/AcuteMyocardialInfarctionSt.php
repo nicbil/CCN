@@ -53,10 +53,10 @@ class AcuteMyocardialInfarctionSt extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            //['id', 'arrival_time', 'first_name', 'last_name', 'patronymic', 'birthday_date', 'gender', 'delivered_smp', 'delivered_yourself', 'killip_type', 'effect_of_thrombolysis', 'thrombolysis', 'ecg', 'time_intervals', 'continuing_pain', 'increase_segment_st', 'thrombaspiration', 'blood_timi_before', 'blood_timi_after', 'stenosis_diameter_ica_before_chkv', 'stenosis_diameter_ica_after_chkv', 'additionally', 'type_interventions', 'lka', 'pka', 'lvg', 'operator', 'date_time_death'], 'required'],
+            [['date_and_time_of_arrival', 'first_name', 'last_name', 'patronymic', 'birthday_date', 'killip_type', 'ecg', 'stenosis_diameter_ica_before_chkv', 'stenosis_diameter_ica_after_chkv'], 'required'],
             [['id', 'killip_type', 'blood_timi_before', 'blood_timi_after', 'stenosis_diameter_ica_before_chkv', 'stenosis_diameter_ica_after_chkv'], 'integer'],
-            [['arrival_date', 'arrival_time', 'birthday_date', 'date_time_death'], 'safe'],
-            [['gender', 'delivered_smp', 'delivered_yourself', 'effect_of_thrombolysis', 'thrombolysis', 'ecg', 'time_intervals', 'continuing_pain', 'increase_segment_st', 'thrombaspiration', 'additionally', 'type_interventions', 'lka', 'pka', 'lvg', 'operator'], 'string'],
+            [['date_and_time_of_arrival', 'birthday_date', 'date_and_time_of_death'], 'safe'],
+            [['gender', 'delivered', 'effect_of_thrombolysis', 'thrombolysis', 'ecg', 'time_intervals', 'continuing_pain', 'increase_segment_st', 'thrombaspiration', 'additionally', 'type_interventions', 'lka', 'pka', 'lvg', 'fv', 'cause_of_death', 'operator'], 'string'],
             [['first_name', 'last_name', 'patronymic'], 'string', 'max' => 100],
         ];
     }

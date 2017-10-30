@@ -27,32 +27,24 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
     'lkaVerticalCount': ['percent', 'b', 'cm', 'cl', 'cb', 'timiAfter', 'timiBefore'],
     'pkaHorizontalCount': ['lang_9', 'lang_81', 'lang_82', 'lang_83', 'lang_84', 'lang_85', 'lang_86', 'lang_87'],
     'pkaVerticalCount': ['percent', 'b', 'cm', 'cl', 'cb', 'timiAfter', 'timiBefore'],
-    'lvgHorizontalCount': ['lang_10', 'lang_76', 'lang_77', 'lang_78', 'lang_79', 'lang_80'],
-    'lvgVerticalCount': ['normakinez', 'gipokinez', 'akinez', 'diskinez'],
+    'lvgHorizontalCount': ['lang_76', 'lang_77', 'lang_78', 'lang_79', 'lang_80'],
   };
 
   protocol: object = {
-    arrival_date: this.datePipe.transform(new Date(), 'dd-MM-yyyy'),
-    arrival_time: this.datePipe.transform(new Date(), 'H:mm'),
+    date_and_time_of_arrival: this.datePipe.transform(new Date(), 'H:mm')+' '+this.datePipe.transform(new Date(), 'dd-MM-yyyy'),
     first_name: '',
     last_name: '',
     patronymic: '',
     birthday_date: '11-08-1989',
     gender: 'man',
-    delivered_smp: '',
-    delivered_yourself: '',
+    delivered: '',
     killip_type: '',
     effect_of_thrombolysis: 'no',
     thrombolysis: {
       type: 'no',
       data: {}
     },
-    ecg: {
-      front_rise: '',
-      lateral_rise: '',
-      lower_rise: '',
-      other: ''
-    },
+    ecg: '',
     time_intervals: {
       date: {},
       time: {},
@@ -61,12 +53,12 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
     continuing_pain: 'no',
     increase_segment_st: 'no',
     thrombaspiration: 'thrombus_not_received',
-    blood_timi_before: '1',
-    blood_timi_after: '1',
+    blood_timi_before: '0',
+    blood_timi_after: '0',
     stenosis_diameter_ica_before_chkv: '',
     stenosis_diameter_ica_after_chkv: '',
     additionally: {},
-    type_interventions: {},
+    type_interventions: '',
     lka: {
       percent: [],
       b: [],
@@ -85,14 +77,11 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
       timiAfter: [],
       timiBefore: []
     },
-    lvg: {
-      normakinez: [],
-      gipokinez: [],
-      akinez: [],
-      diskinez: [],
-    },
+    lvg: {},
+    cause_of_death: '',
     operator: '',
-    date_time_death: '12:50 13-10-2099',
+    date_and_time_of_death: '12:50 13-10-2099',
+    fv: ''
   };
   warning_save: boolean = false;
   succes_save: boolean = false;

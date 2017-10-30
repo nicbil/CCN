@@ -7,19 +7,12 @@
     .sub-group-of-thrombolysis
       margin-top: 10px
 
-  .wrap-kind-interventions
-    .block-checkboxs
-      display: flex
-      justify-content: space-between
-      flex-wrap: wrap
-
-      .block
-        display: flex
-        flex-direction: column
-
   .wrap-additionally
     display: flex
-    flex-flow: column wrap
+    flex-flow: row wrap
+
+    .mat-checkbox
+      margin-right: 20px
 
   .group
     display: flex
@@ -44,10 +37,7 @@
     .text-left
       text-align: left
 
-  .table-lka
-    .ng-invalid
-      border-bottom: 1px solid red
-
+  .table-lka, .table-pka
     tbody
       tr
         td:first-child
@@ -55,30 +45,14 @@
           padding-right: 15px
           font-size: 12px
           font-weight: bold
+          vertical-align: middle
 
-  .table-pka
+  .lvg
     .ng-invalid
       border-bottom: 1px solid red
 
-    tbody
-      tr
-        td:first-child
-          text-align: left
-          padding-right: 15px
-          font-size: 12px
-          font-weight: bold
-
-  .table-lvg
-    .ng-invalid
-      border-bottom: 1px solid red
-
-    tbody
-      tr
-        td:first-child
-          text-align: left
-          padding-right: 15px
-          font-size: 12px
-          font-weight: bold
+    .mat-input-container
+      width: 100px
 
   .table-lka
     th

@@ -19,7 +19,7 @@ class AcuteMyocardialInfarctionStSearch extends AcuteMyocardialInfarctionSt
     {
         return [
             [['id'], 'integer'],
-            [['arrival_date', 'arrival_time', 'first_name', 'last_name', 'patronymic', 'birthday_date', 'gender', 'delivered_smp', 'delivered_yourself', 'effect_of_thrombolysis', 'thrombolysis', 'ecg', 'time_intervals', 'continuing_pain', 'increase_segment_st', 'thrombaspiration', 'additionally', 'type_interventions', 'lka', 'pka', 'lvg', 'operator', 'date_time_death', , 'killip_type', 'blood_timi_before', 'blood_timi_after', 'stenosis_diameter_ica_before_chkv', 'stenosis_diameter_ica_after_chkv'], 'safe'],
+            [['date_and_time_of_arrival', 'first_name', 'last_name', 'patronymic', 'birthday_date', 'gender', 'delivered', 'effect_of_thrombolysis', 'thrombolysis', 'ecg', 'time_intervals', 'continuing_pain', 'increase_segment_st', 'thrombaspiration', 'additionally', 'type_interventions', 'lka', 'pka', 'lvg', 'operator', 'date_and_time_of_death', 'killip_type', 'blood_timi_before', 'blood_timi_after', 'stenosis_diameter_ica_before_chkv', 'stenosis_diameter_ica_after_chkv'], 'safe'],
         ];
     }
 
@@ -60,23 +60,21 @@ class AcuteMyocardialInfarctionStSearch extends AcuteMyocardialInfarctionSt
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'arrival_date' => $this->arrival_date,
-            'arrival_time' => $this->arrival_time,
+            'date_and_time_of_arrival' => $this->date_and_time_of_arrival,
             'birthday_date' => $this->birthday_date,
             'killip_type' => $this->killip_type,
             'blood_timi_before' => $this->blood_timi_before,
             'blood_timi_after' => $this->blood_timi_after,
             'stenosis_diameter_ica_before_chkv' => $this->stenosis_diameter_ica_before_chkv,
             'stenosis_diameter_ica_after_chkv' => $this->stenosis_diameter_ica_after_chkv,
-            'date_time_death' => $this->date_time_death,
+            'date_and_time_of_death' => $this->date_and_time_of_death,
         ]);
 
         $query->andFilterWhere(['like', 'first_name', $this->first_name])
             ->andFilterWhere(['like', 'last_name', $this->last_name])
             ->andFilterWhere(['like', 'patronymic', $this->patronymic])
             ->andFilterWhere(['like', 'gender', $this->gender])
-            ->andFilterWhere(['like', 'delivered_smp', $this->delivered_smp])
-            ->andFilterWhere(['like', 'delivered_yourself', $this->delivered_yourself])
+            ->andFilterWhere(['like', 'delivered', $this->delivered])
             ->andFilterWhere(['like', 'effect_of_thrombolysis', $this->effect_of_thrombolysis])
             ->andFilterWhere(['like', 'thrombolysis', $this->thrombolysis])
             ->andFilterWhere(['like', 'ecg', $this->ecg])

@@ -6,7 +6,7 @@ import { AppRoutingModule, routingComponents } from './app.routing';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatInputModule, MatRadioModule,
-MatNativeDateModule, MatDatepickerModule, MatSelectModule, MatMenuModule } from '@angular/material';
+MatNativeDateModule, MatDatepickerModule, MatSelectModule, MatMenuModule, MatAutocompleteModule } from '@angular/material';
 import { TextMaskModule } from 'angular2-text-mask';
 import { RestrictInputDirective } from './restrictinput.directive';
 import { CustomFormsModule } from 'ng2-validation';
@@ -44,6 +44,7 @@ import { ChartsModule } from 'ng2-charts';
     MatNativeDateModule,
     MatDatepickerModule,
     MatSelectModule,
+    MatAutocompleteModule,
     TextMaskModule,
     CustomFormsModule,
     ReactiveFormsModule,

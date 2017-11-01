@@ -86,9 +86,9 @@ export const LANG_RU_TRANS = {
   'lang_63': 'Причина смерти',
   'fv': 'ФВ',
   'lang_65': 'Фильтр',
-  'lang_66': '',
-  'lang_67': '',
-  'lang_68': '',
+  'lang_66': 'Дата поступления пациента',
+  'lang_67': 'От',
+  'lang_68': 'До',
   'lang_69': '',
   'lang_70': '',
   'lang_71': '',
@@ -129,4 +129,5 @@ export const LANG_RU_TRANS = {
   'itemsPerPageLabel': 'Элементов на странице',
   'nextPageLabel': 'Следущая страница',
   'previousPageLabel': 'Предыдущая страница',
+  'lang_105': 'Отправить'
 };

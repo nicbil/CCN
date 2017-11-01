@@ -75,6 +75,40 @@ class ApiController extends ActiveController {
     $post = json_decode(trim(file_get_contents('php://input')), true);
 
     $query = AcuteMyocardialInfarctionSt::find();
+
+    if(!empty($post['fields']['date_and_time_of_arrival_from'])) {
+      $date_and_time_of_arrival_from = \Yii::$app->formatter->asDate($post['fields']['date_and_time_of_arrival_from'], 'php:Y-m-d');
+
+      $query->where(['>=', 'date_and_time_of_arrival', $date_and_time_of_arrival_from]);
+    }
+
+    if(!empty($post['fields']['date_and_time_of_arrival_before'])) {
+      $date_and_time_of_arrival_before = \Yii::$app->formatter->asDate($post['fields']['date_and_time_of_arrival_before'], 'php:Y-m-d').' 23:59:59';
+
+      $query->andWhere(['<=', 'date_and_time_of_arrival', $date_and_time_of_arrival_before]);
+    }
+
+    if(!empty($post['fields']['fv'])) {
+      if($post['fields']['fv'] == 30) {
+        $query->where(['<=', 'fv', $post['fields']['fv']]);
+      }
+
+      if($post['fields']['fv'] == 40) {
+        $query->where(['>=', 'fv', 30]);
+        $query->andWhere(['<=', 'fv', $post['fields']['fv']]);
+      }
+
+      if($post['fields']['fv'] == 50) {
+        $query->where(['>=', 'fv', 40]);
+        $query->andWhere(['<=', 'fv', $post['fields']['fv']]);
+      }
+
+      if($post['fields']['fv'] == 70) {
+        $query->where(['>=', 'fv', 50]);
+        $query->andWhere(['<=', 'fv', $post['fields']['fv']]);
+      }
+    }
+
     $query->limit($post['pagination']['pageSize']);
 
     if(!empty($post['pagination']['pageIndex'])) {
@@ -85,7 +119,7 @@ class ApiController extends ActiveController {
       $query->orderBy([$post['sort']['active'] => (($post['sort']['direction'] == 'asc') ? SORT_ASC : SORT_DESC)]);
     }
     $res = $query->all();
-
+    //print_r($date_and_time_of_arrival_from); die();
     return array(
       'rows' => $res,
       'pageLength' => $query->count('id')

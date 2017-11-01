@@ -1,24 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { HttpService } from '../../shared/http.service';
+import { DataService } from "../../shared/data.service";
 
 @Component({
   selector: 'app-create-protocol-with-acute-myocardial-infarction',
   templateUrl: './create-protocol-with-acute-myocardial-infarction.component.html',
   styleUrls: ['./create-protocol-with-acute-myocardial-infarction.component.sass'],
-  providers: [DatePipe, HttpService]
+  providers: [DataService, DatePipe, HttpService]
 })
 export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnInit {
-  transformToStringify: any[] = ['thrombolysis','ecg','time_intervals','lka','pka','lvg','additionally','type_interventions'];
-  maskDate: any[] = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-  maskTime: any[] = [/\d/, /\d/, ':', /\d/, /\d/];
-  maskDateTime: any[] = [/\d/, /\d/, ':', /\d/, /\d/, ' ', /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-  maskPercentage: any[] = [/\d/, /\d/, /\d/];
-
-  patternPercentage = /^[0-9]|[0-2][0-9]|3[0-6]$/;
-  patternDate: any = /^(0[1-9]|[12][0-9]|3[01])[-](0[1-9]|1[012])[-](19|20)\d\d$/;
-  patternTime: any = /^(((([0-1][0-9])|(2[0-3])):?[0-5][0-9])|(24:?00))/;
-  patternTimeDate: any = /^(((([0-1][0-9])|(2[0-3])):?[0-5][0-9])|(24:?00)) (0[1-9]|[12][0-9]|3[01])[-](0[1-9]|1[012])[-](19|20)\d\d$/;
+  transformToStringify: any[] = ['thrombolysis', 'ecg', 'time_intervals', 'lka', 'pka', 'lvg', 'additionally', 'type_interventions'];
 
   tables: object = {
     'time_intervals_vertical_count': ['onsetOfSymptoms', 'firstMedicalContact', 'ecg', 'enteringTheHospital',
@@ -30,7 +22,7 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
     'lvgHorizontalCount': ['lang_76', 'lang_77', 'lang_78', 'lang_79', 'lang_80'],
   };
 
-  protocol: object = {
+  private protocol: object = {
     date_and_time_of_arrival: this.datePipe.transform(new Date(), 'H:mm')+' '+this.datePipe.transform(new Date(), 'dd-MM-yyyy'),
     first_name: '',
     last_name: '',
@@ -85,7 +77,7 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
   };
   warning_save: boolean = false;
   succes_save: boolean = false;
-  constructor(private datePipe: DatePipe, private httpService: HttpService) {}
+  constructor(private datePipe: DatePipe, private httpService: HttpService, private dataService: DataService) {}
 
   ngOnInit() {
     console.log();

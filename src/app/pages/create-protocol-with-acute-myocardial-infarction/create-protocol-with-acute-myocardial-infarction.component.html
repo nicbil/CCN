@@ -10,8 +10,8 @@
             name="date_and_time_of_arrival"
             #arrival_date="ngModel"
             placeholder="{{'lang_36' | translate}}"
-            [textMask]="{mask: maskDateTime}"
-            [pattern]="patternTimeDate" required>
+            [textMask]="{mask: dataService.maskDateTime}"
+            [pattern]="dataService.patternTimeDate" required>
         </mat-form-field>
       </div>
 
@@ -29,8 +29,8 @@
 
       <mat-form-field class="wrap-date">
         <input matInput [(ngModel)]='protocol.birthday_date' name="birthday_date" placeholder="{{'birthday_date' | translate}}"
-         [textMask]="{mask: maskDate}"
-         [pattern]="patternDate" required>
+         [textMask]="{mask: dataService.maskDate}"
+         [pattern]="dataService.patternDate" required>
       </mat-form-field>
 
       <mat-radio-group class="wrap-gender" [(ngModel)]='protocol.gender' name="gender">
@@ -88,8 +88,8 @@
             <ng-container *ngIf="protocol.thrombolysis.type === 'yes'">
               <mat-form-field class="">
                 <input matInput [(ngModel)]="protocol.thrombolysis.data.time" name="thrombolysis_time"
-                 [pattern]="patternTime"
-                 [textMask]="{mask: maskTime}"
+                 [pattern]="dataService.patternTime"
+                 [textMask]="{mask: dataService.maskTime}"
                  placeholder="{{'lang_52' | translate}}">
               </mat-form-field>
 
@@ -125,8 +125,8 @@
           <mat-form-field class="wrap-date">
             <input matInput [(ngModel)]='protocol.time_intervals.date[horizontalI]'
              name="timeIntervalsDate{{horizontalI}}"
-             [textMask]="{mask: maskDate}"
-             [pattern]="patternDate"
+             [textMask]="{mask: dataService.maskDate}"
+             [pattern]="dataService.patternDate"
              placeholder="{{'lang_32' | translate}}">
           </mat-form-field>
         </td>
@@ -134,8 +134,8 @@
           <mat-form-field class="wrap-time">
             <input matInput [(ngModel)]="protocol.time_intervals.time[horizontalI]"
                name="timeIntervalsTime{{horizontalI}}"
-               [pattern]="patternTime"
-               [textMask]="{mask: maskTime}"
+               [pattern]="dataService.patternTime"
+               [textMask]="{mask: dataService.maskTime}"
                placeholder="{{'lang_33' | translate}}">
           </mat-form-field>
         </td>
@@ -245,8 +245,8 @@
 
     <mat-form-field class="wrap-date">
       <input matInput [(ngModel)]='protocol.date_and_time_of_death' name="date_and_time_of_death" placeholder="{{'lang_6' | translate}}"
-       [textMask]="{mask: maskDateTime}"
-       [pattern]="patternTimeDate">
+       [textMask]="{mask: dataService.maskDateTime}"
+       [pattern]="dataService.patternTimeDate">
     </mat-form-field>
 
     <mat-form-field>
@@ -362,7 +362,7 @@
 
     <mat-form-field>
       <mat-select placeholder="{{'fv' | translate}}" [(ngModel)]="protocol.fv" name="fv">
-        <mat-option value="30"><30</mat-option>
+        <mat-option value="30"><=30</mat-option>
         <mat-option value="40">30-40</mat-option>
         <mat-option value="50">40-50</mat-option>
         <mat-option value="70">50-70</mat-option>

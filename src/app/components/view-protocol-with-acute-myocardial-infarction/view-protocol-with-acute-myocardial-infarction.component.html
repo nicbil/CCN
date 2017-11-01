@@ -6,7 +6,38 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
 
-    must be fields
+    <form class="wrap-form" #filterForm="ngForm" (ngSubmit)="showTable(filterForm)">
+      {{'lang_67' | translate}}&nbsp;
+      <mat-form-field class="wrap-date">
+        <input matInput [(ngModel)]='filter.date_and_time_of_arrival_from' id="date_and_time_of_arrival_from"
+          name="date_and_time_of_arrival_from"
+          #arrival_date="ngModel"
+          placeholder="{{'lang_66' | translate}}"
+          [textMask]="{mask: dataService.maskDate}"
+          [pattern]="dataService.patternDate">
+      </mat-form-field>
+
+      {{'lang_68' | translate}}&nbsp;
+      <mat-form-field class="wrap-date">
+        <input matInput [(ngModel)]='filter.date_and_time_of_arrival_before' id="date_and_time_of_arrival_before"
+          name="date_and_time_of_arrival_before"
+          #arrival_date="ngModel"
+          placeholder="{{'lang_66' | translate}}"
+          [textMask]="{mask: dataService.maskDate}"
+          [pattern]="dataService.patternDate">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="{{'fv' | translate}}" [(ngModel)]="filter.fv" name="fv">
+          <mat-option value="30"><=30</mat-option>
+          <mat-option value="40">30-40</mat-option>
+          <mat-option value="50">40-50</mat-option>
+          <mat-option value="70">50-70</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button class='filter-button' (click)="showTable(filterForm)">{{'lang_105' | translate}}</button>
+    </form>
   </mat-expansion-panel>
 </div>
 
@@ -27,4 +58,32 @@
    [pageSize]="pageSize"
    [pageSizeOptions]="pageSizeOptions">
   </mat-paginator>
+</div>
+<br>
+
+<div class="row">
+  <div class="col-md-12">
+    <canvas baseChart
+      [data]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [chartType]="lineChartType"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)">
+    </canvas>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+<!--    <canvas baseChart
+      [data]="pieChartData"
+      [labels]="pieChartLabels"
+      [chartType]="pieChartType"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)">
+    </canvas>-->
+  </div>
+</div>
+<div class="col-md-12 text-center" style="margin-top: 10px;height: 50%">
+  <button (click)="randomizeType()" style="display: inline-block">Toggle</button>
 </div>

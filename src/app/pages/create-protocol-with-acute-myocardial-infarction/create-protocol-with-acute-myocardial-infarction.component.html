@@ -16,26 +16,26 @@
       </div>
 
       <mat-form-field>
-        <input matInput [(ngModel)]="protocol.first_name" name="first_name" placeholder="{{'lang_38' | translate}}" required>
+        <input matInput [(ngModel)]="protocol.first_name" name="first_name" placeholder="{{'first_name' | translate}}" required>
       </mat-form-field>
 
       <mat-form-field class="">
-        <input matInput [(ngModel)]="protocol.last_name" name="last_name" placeholder="{{'lang_39' | translate}}" required>
+        <input matInput [(ngModel)]="protocol.last_name" name="last_name" placeholder="{{'last_name' | translate}}" required>
       </mat-form-field>
 
       <mat-form-field class="">
-        <input matInput [(ngModel)]="protocol.patronymic" name="patronymic" placeholder="{{'lang_40' | translate}}" required>
+        <input matInput [(ngModel)]="protocol.patronymic" name="patronymic" placeholder="{{'patronymic' | translate}}" required>
       </mat-form-field>
 
       <mat-form-field class="wrap-date">
-        <input matInput [(ngModel)]='protocol.birthday_date' name="birthday_date" placeholder="{{'lang_35' | translate}}"
+        <input matInput [(ngModel)]='protocol.birthday_date' name="birthday_date" placeholder="{{'birthday_date' | translate}}"
          [textMask]="{mask: maskDate}"
          [pattern]="patternDate" required>
       </mat-form-field>
 
       <mat-radio-group class="wrap-gender" [(ngModel)]='protocol.gender' name="gender">
-        <mat-radio-button value="man" checked>{{'lang_41' | translate}}</mat-radio-button>
-        <mat-radio-button value="woman">{{'lang_42' | translate}}</mat-radio-button>
+        <mat-radio-button value="man" checked>{{'man' | translate}}</mat-radio-button>
+        <mat-radio-button value="woman">{{'women' | translate}}</mat-radio-button>
       </mat-radio-group>
 
       <mat-form-field class="">
@@ -361,7 +361,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-select placeholder="{{'lang_64' | translate}}" [(ngModel)]="protocol.fv" name="fv">
+      <mat-select placeholder="{{'fv' | translate}}" [(ngModel)]="protocol.fv" name="fv">
         <mat-option value="30"><30</mat-option>
         <mat-option value="40">30-40</mat-option>
         <mat-option value="50">40-50</mat-option>

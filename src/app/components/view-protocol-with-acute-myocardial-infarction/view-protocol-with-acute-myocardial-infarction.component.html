@@ -1,0 +1,30 @@
+<div class="wrap-filter">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{'lang_65' | translate}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    must be fields
+  </mat-expansion-panel>
+</div>
+
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="{{field}}" *ngFor="let field of displayedColumns">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{field | translate}} </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ tableRow(row, field)}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+   [length]="pageLength"
+   [pageIndex]="pageIndex"
+   [pageSize]="pageSize"
+   [pageSizeOptions]="pageSizeOptions">
+  </mat-paginator>
+</div>

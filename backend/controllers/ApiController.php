@@ -61,17 +61,34 @@ class ApiController extends ActiveController {
       }
     }
 
-
     //print_r($post); die();
     $model = new AcuteMyocardialInfarctionSt();
-    $data = array(
-      '_csrf-backend' => 'xkIK_iVqasGhiYXhZsg_lZ_d5lfRLAOlrpcAPFa2GRV11BuT-WHehrjX-Oo4_0qUL1PkQCrA5pKidOlfI5WkDQ==',
-      'AcuteMyocardialInfarctionSt' => $post
-    );
+    $data = array('AcuteMyocardialInfarctionSt' => $post);
 
     if ($model->load($data) && $model->save()) {
       return(object)['success' => true];
     }
     return (object)['success' => false];
+  }
+
+  public function actionGet_protocol_infarction_st() {
+    $post = json_decode(trim(file_get_contents('php://input')), true);
+
+    $query = AcuteMyocardialInfarctionSt::find();
+    $query->limit($post['pagination']['pageSize']);
+
+    if(!empty($post['pagination']['pageIndex'])) {
+      $query->offset($post['pagination']['pageIndex'] * $post['pagination']['pageSize']);
+    }
+
+    if(!empty($post['sort']['active'])) {
+      $query->orderBy([$post['sort']['active'] => (($post['sort']['direction'] == 'asc') ? SORT_ASC : SORT_DESC)]);
+    }
+    $res = $query->all();
+
+    return array(
+      'rows' => $res,
+      'pageLength' => $query->count('id')
+    );
   }
 }

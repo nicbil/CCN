@@ -6,7 +6,8 @@ import { AppRoutingModule, routingComponents } from './app.routing';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatInputModule, MatRadioModule,
-MatNativeDateModule, MatDatepickerModule, MatSelectModule, MatMenuModule, MatAutocompleteModule } from '@angular/material';
+MatNativeDateModule, MatDatepickerModule, MatSelectModule, MatMenuModule,
+MatAutocompleteModule, MatTableModule, MatPaginatorModule, MatExpansionModule, MatSortModule } from '@angular/material';
 import { TextMaskModule } from 'angular2-text-mask';
 import { RestrictInputDirective } from './restrictinput.directive';
 import { CustomFormsModule } from 'ng2-validation';
@@ -17,6 +18,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgDatepickerModule } from 'ng2-datepicker';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { ChartsModule } from 'ng2-charts';
+import { ViewProtocolWithAcuteMyocardialInfarctionComponent } from './components/view-protocol-with-acute-myocardial-infarction/view-protocol-with-acute-myocardial-infarction.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { ChartsModule } from 'ng2-charts';
     CreateProtocolWithAcuteMyocardialInfarctionComponent,
     IndexComponent,
     MainMenuComponent,
+    ViewProtocolWithAcuteMyocardialInfarctionComponent,
   ],
   imports: [
     NgbModule.forRoot(),
@@ -45,6 +48,10 @@ import { ChartsModule } from 'ng2-charts';
     MatDatepickerModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatSortModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatExpansionModule,
     TextMaskModule,
     CustomFormsModule,
     ReactiveFormsModule,

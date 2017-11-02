@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { HttpService } from '../../shared/http.service';
 import { DataService } from "../../shared/data.service";
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
+import {split} from "ts-node/dist";
 
 @Component({
   selector: 'app-create-protocol-with-acute-myocardial-infarction',
@@ -11,7 +20,6 @@ import { DataService } from "../../shared/data.service";
 })
 export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnInit {
   transformToStringify: any[] = ['thrombolysis', 'ecg', 'time_intervals', 'lka', 'pka', 'lvg', 'additionally', 'type_interventions'];
-
   tables: object = {
     'time_intervals_vertical_count': ['onsetOfSymptoms', 'firstMedicalContact', 'ecg', 'enteringTheHospital',
       'ecgInTheHospital', 'fibrinolysisOrThrombolysis', 'arrivalInAngiography', 'restoringBloodFlow'],
@@ -21,8 +29,7 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
     'pkaVerticalCount': ['percent', 'b', 'cm', 'cl', 'cb', 'timiAfter', 'timiBefore'],
     'lvgHorizontalCount': ['lang_76', 'lang_77', 'lang_78', 'lang_79', 'lang_80'],
   };
-
-  private protocol: object = {
+  protocol: object = {
     date_and_time_of_arrival: this.datePipe.transform(new Date(), 'H:mm')+' '+this.datePipe.transform(new Date(), 'dd-MM-yyyy'),
     first_name: '',
     last_name: '',
@@ -75,33 +82,69 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
     date_and_time_of_death: '12:50 13-10-2099',
     fv: ''
   };
-  warning_save: boolean = false;
-  succes_save: boolean = false;
-  constructor(private datePipe: DatePipe, private httpService: HttpService, private dataService: DataService) {}
+  filteredOptionsAutocomplete: Observable<string[]>;
+  autocompleteControl: FormControl = new FormControl();
+  responseAfterSave: object = {};
 
+  constructor(private datePipe: DatePipe, private httpService: HttpService, private dataService: DataService) {}
   ngOnInit() {
-    console.log();
+    this.filteredOptionsAutocomplete = this.autocompleteControl.valueChanges
+      .debounceTime(400)
+      .startWith(null)
+      .distinctUntilChanged()
+      .switchMap(searchLine => this.searchAutocomplete(searchLine));
   }
 
-  send(form) {
-    this.warning_save = false;
-    this.succes_save = false;
+  searchAutocomplete(searchLine) {
+    if (searchLine) {
+      return this.httpService.Http(this.protocol, 'auto_complete_protocol_infarction_st').map(protocols => {
+        return protocols['rows'];
+      });
+    }
+    return [];
+  }
+
+  applyAutocomplete(data) {
+    this.protocol = Object.assign({}, data);
+    this.protocol['birthday_date'] = this.transformDate(this.protocol['birthday_date'], true);
+    this.protocol['date_and_time_of_arrival'] = this.transformDate(this.protocol['date_and_time_of_arrival'], false);
+    this.protocol['date_and_time_of_death'] = this.transformDate(this.protocol['date_and_time_of_death'], true);
+
+    this.transformToStringify.forEach((item) => {
+      this.protocol[item] = JSON.parse(this.protocol[item]);
+    });
+  }
+
+  transformDate(date, onlyDate) {
+    if (date) {
+      if (onlyDate) {
+        return this.datePipe.transform(date, 'dd-MM-yyyy');
+      } else {
+        const date_and_time = date.split(' ');
+        const time = date_and_time[1].split(':');
+        return `${time[0]}:${time[1]} ${this.datePipe.transform(date_and_time[0], 'dd-MM-yyyy')}`;
+      }
+    }
+  }
+
+  saveForm(form) {
+    this.responseAfterSave = {};
     if (form.valid) {
       const dataProtocol = Object.assign({}, this.protocol);
-      this.transformToStringify.forEach((item, index) => {
+      this.transformToStringify.forEach((item) => {
         dataProtocol[item] = JSON.stringify(dataProtocol[item]);
       });
 
       this.httpService.Http(dataProtocol, 'create_protocol_infarction_st')
       .subscribe(res => {
         if (res.success) {
-          this.succes_save = true;
+          this.responseAfterSave = {'success': true};
         } else {
-          this.warning_save = true;
+          this.responseAfterSave = {'error': true};
         }
       });
     } else {
-      this.warning_save = true;
+      this.responseAfterSave = {'error': true};
     }
   }
 }

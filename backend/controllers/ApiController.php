@@ -51,6 +51,10 @@ class ApiController extends ActiveController {
     $post['birthday_date'] = !empty($post['birthday_date']) ?
       \Yii::$app->formatter->asDate($post['birthday_date'], 'php:Y-m-d') : '00-00-00';
 
+    if(!empty($post['id'])) {
+      unset($post['id']);
+    }
+
     foreach (['date_and_time_of_arrival', 'date_time_death'] as $field) {
       if(!empty($post[$field])) {
         $date_time = explode(' ', $post[$field]);
@@ -124,5 +128,20 @@ class ApiController extends ActiveController {
       'rows' => $res,
       'pageLength' => $query->count('id')
     );
+  }
+
+  public function actionAuto_complete_protocol_infarction_st() {
+    $post = json_decode(trim(file_get_contents('php://input')), true);
+
+    if(!empty($post['first_name']) && !empty($post['last_name']) && !empty($post['patronymic'])) {
+      $query = AcuteMyocardialInfarctionSt::find();
+
+      $query->andFilterWhere(['like', 'first_name', $post['first_name']]);
+      $query->andFilterWhere(['like', 'last_name', $post['last_name']]);
+      $query->andFilterWhere(['like', 'patronymic', $post['patronymic']]);
+      $res = $query->all();
+    }
+
+    return array('rows' => !empty($res) ? $res : []);
   }
 }

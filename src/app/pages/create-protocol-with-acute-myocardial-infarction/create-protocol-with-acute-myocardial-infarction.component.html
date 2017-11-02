@@ -2,9 +2,9 @@
 <div class="wrap-body">
   <div class="title-head">{{'lang_96' | translate}}</div>
 
-  <form class="wrap-form" #protocolForm="ngForm" (ngSubmit)="send(protocolForm)">
+  <form class="wrap-form" #protocolForm="ngForm" (ngSubmit)="saveForm(protocolForm)">
     <div>
-        <div>
+      <div>
         <mat-form-field class="wrap-date">
           <input matInput [(ngModel)]='protocol.date_and_time_of_arrival' id="date_and_time_of_arrival"
             name="date_and_time_of_arrival"
@@ -23,8 +23,19 @@
         <input matInput [(ngModel)]="protocol.last_name" name="last_name" placeholder="{{'last_name' | translate}}" required>
       </mat-form-field>
 
-      <mat-form-field class="">
-        <input matInput [(ngModel)]="protocol.patronymic" name="patronymic" placeholder="{{'patronymic' | translate}}" required>
+      <mat-form-field class="example-full-width">
+        <input type="text"
+               placeholder="{{'patronymic' | translate}}"
+               matInput
+               [formControl]="autocompleteControl"
+               [matAutocomplete]="patronymic"
+               [(ngModel)]="protocol.patronymic" name="patronymic">
+
+        <mat-autocomplete #patronymic="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptionsAutocomplete | async" [value]="option.patronymic" (click)="applyAutocomplete(option)">
+            {{ option.first_name }} {{ option.last_name }} {{ option.patronymic }} - {{ transformDate(option.birthday_date, true) }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
 
       <mat-form-field class="wrap-date">
@@ -373,16 +384,16 @@
 
 <div class="wrap-footer" [ngClass]="[protocolForm.valid ? '' : 'hide']">
   <div class="footer">
-    <button class='save-button' (click)="send(protocolForm)">{{'lang_100' | translate}}</button>
+    <button class='save-button' (click)="saveForm(protocolForm)">{{'lang_100' | translate}}</button>
   </div>
 </div>
 
-<div class="alert alert-danger alert-dismissible" *ngIf="warning_save">
-  <a class="close" (click)="warning_save = false">&times;</a>
+<div class="alert alert-danger alert-dismissible" *ngIf="responseAfterSave['error']">
+  <a class="close" (click)="responseAfterSave['error'] = false">&times;</a>
   <strong>{{'lang_102' | translate}} </strong> {{'lang_101' | translate}}
 </div>
 
-<div class="alert alert-success alert-dismissible" *ngIf="succes_save">
-  <a class="close" (click)="succes_save = false">&times;</a>
+<div class="alert alert-success alert-dismissible" *ngIf="responseAfterSave['success']">
+  <a class="close" (click)="responseAfterSave['success'] = false">&times;</a>
   <strong>{{'lang_103' | translate}} </strong> {{'lang_104' | translate}}
 </div>

@@ -13,11 +13,11 @@ class m171023_114730_acute_myocardial_infarction_st extends Migration
 
         $this->createTable('{{%acute_myocardial_infarction_st}}', [
             'id' => 'int(11) PRIMARY KEY AUTO_INCREMENT',
-            'date_and_time_of_arrival' => 'datetime NOT NULL',
+            'date_and_time_of_arrival' => 'datetime NULL DEFAULT NULL',
             'first_name' => 'varchar(100) NOT NULL',
             'last_name' => 'varchar(100) NOT NULL',
             'patronymic' => 'varchar(100) NOT NULL',
-            'birthday_date' => 'date NOT NULL',
+            'birthday_date' => 'date NULL DEFAULT NULL',
             'gender' => "enum('man','woman','','') NOT NULL",
             'delivered' => 'text NOT NULL',
             'killip_type' => 'varchar(2) NOT NULL',
@@ -40,7 +40,7 @@ class m171023_114730_acute_myocardial_infarction_st extends Migration
             'fv' => 'text NOT NULL',
             'cause_of_death' => 'text NOT NULL',
             'operator' => 'text NOT NULL',
-            'date_and_time_of_death' => 'datetime NOT NULL'
+            'date_and_time_of_death' => 'datetime NULL DEFAULT NULL'
         ], $tableOptions);
     }
 

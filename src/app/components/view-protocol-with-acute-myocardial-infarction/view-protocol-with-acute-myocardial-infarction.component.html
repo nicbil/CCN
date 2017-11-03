@@ -6,37 +6,87 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <form class="wrap-form" #filterForm="ngForm" (ngSubmit)="showTable(filterForm)">
-      {{'lang_67' | translate}}&nbsp;
-      <mat-form-field class="wrap-date">
-        <input matInput [(ngModel)]='filter.date_and_time_of_arrival_from' id="date_and_time_of_arrival_from"
-          name="date_and_time_of_arrival_from"
-          #arrival_date="ngModel"
-          placeholder="{{'lang_66' | translate}}"
-          [textMask]="{mask: dataService.maskDate}"
-          [pattern]="dataService.patternDate">
-      </mat-form-field>
+    <form class="filter" #filterForm="ngForm" (ngSubmit)="showTable(filterForm)">
+      <div class="filter__fields">
+        <div>
+          {{'lang_67' | translate}}&nbsp;
+          <mat-form-field class="wrap-date">
+            <input matInput [(ngModel)]='filter.date_and_time_of_arrival_from' id="date_and_time_of_arrival_from"
+              name="date_and_time_of_arrival_from"
+              #arrival_date="ngModel"
+              placeholder="{{'lang_66' | translate}}"
+              [textMask]="{mask: dataService.maskDate}"
+              [pattern]="dataService.patternDate">
+          </mat-form-field>
 
-      {{'lang_68' | translate}}&nbsp;
-      <mat-form-field class="wrap-date">
-        <input matInput [(ngModel)]='filter.date_and_time_of_arrival_before' id="date_and_time_of_arrival_before"
-          name="date_and_time_of_arrival_before"
-          #arrival_date="ngModel"
-          placeholder="{{'lang_66' | translate}}"
-          [textMask]="{mask: dataService.maskDate}"
-          [pattern]="dataService.patternDate">
-      </mat-form-field>
+          {{'lang_68' | translate}}&nbsp;
+          <mat-form-field class="wrap-date">
+            <input matInput [(ngModel)]='filter.date_and_time_of_arrival_before' id="date_and_time_of_arrival_before"
+              name="date_and_time_of_arrival_before"
+              #arrival_date="ngModel"
+              placeholder="{{'lang_66' | translate}}"
+              [textMask]="{mask: dataService.maskDate}"
+              [pattern]="dataService.patternDate">
+          </mat-form-field>
+        </div>
 
-      <mat-form-field>
-        <mat-select placeholder="{{'fv' | translate}}" [(ngModel)]="filter.fv" name="fv">
-          <mat-option value="30"><=30</mat-option>
-          <mat-option value="40">30-40</mat-option>
-          <mat-option value="50">40-50</mat-option>
-          <mat-option value="70">50-70</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <div>
+          <div class="filter__title">{{'gender' | translate}}</div>
+          <mat-checkbox [(ngModel)]="filter.gender['man']" name="man">
+            {{'man' | translate}}
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="filter.gender['woman']" name="woman">
+            {{'women' | translate}}
+          </mat-checkbox>
+        </div>
 
-      <button class='filter-button' (click)="showTable(filterForm)">{{'lang_105' | translate}}</button>
+        <div>
+          &nbsp;&nbsp;{{'lang_67' | translate}}&nbsp;
+          <mat-form-field class="wrap-date">
+            <input matInput [(ngModel)]='filter.birthday_date_from' id="birthday_date_from"
+                   name="birthday_date_from"
+                   #arrival_date="ngModel"
+                   placeholder="{{'birthday_date' | translate}}"
+                   [textMask]="{mask: dataService.maskDate}"
+                   [pattern]="dataService.patternDate">
+          </mat-form-field>
+
+          {{'lang_68' | translate}}&nbsp;
+          <mat-form-field class="wrap-date">
+            <input matInput [(ngModel)]='filter.birthday_date_before' id="birthday_date_before"
+                   name="birthday_date_before"
+                   #arrival_date="ngModel"
+                   placeholder="{{'birthday_date' | translate}}"
+                   [textMask]="{mask: dataService.maskDate}"
+                   [pattern]="dataService.patternDate">
+          </mat-form-field>
+        </div>
+
+        <div class="wrap-radio">
+          <div class="filter__title">{{'lang_54' | translate}}</div>
+          <mat-checkbox [(ngModel)]="filter.effect_of_thrombolysis['no']" name="effect_of_thrombolysis_no">
+            {{'lang_49' | translate}}
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="filter.effect_of_thrombolysis['yes']" name="effect_of_thrombolysis_yes">
+            {{'lang_50' | translate}}
+          </mat-checkbox>
+        </div>
+
+        <div>
+          <mat-form-field>
+            <mat-select placeholder="{{'fv' | translate}}" [(ngModel)]="filter.fv" name="fv">
+              <mat-option value="30"><=30</mat-option>
+              <mat-option value="40">30-40</mat-option>
+              <mat-option value="50">40-50</mat-option>
+              <mat-option value="70">50-70</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="filter__buttons">
+        <button class='btn btn-secondary' (click)="resetFilter()">{{'lang_73' | translate}}</button>
+        <button class='btn btn-primary' (click)="showTable(filterForm)">{{'lang_105' | translate}}</button>
+      </div>
     </form>
   </mat-expansion-panel>
 </div>

@@ -77,8 +77,17 @@ class ApiController extends ActiveController {
 
   public function actionGet_protocol_infarction_st() {
     $post = json_decode(trim(file_get_contents('php://input')), true);
-
     $query = AcuteMyocardialInfarctionSt::find();
+
+    if(!empty($post['fields']['gender'])) {
+      if(!empty($post['fields']['gender']['man']) && empty($post['fields']['gender']['woman'])) {
+        $query->where(['=', 'gender', 'man']);
+      }
+
+      if(empty($post['fields']['gender']['man']) && !empty($post['fields']['gender']['woman'])) {
+        $query->where(['=', 'gender', 'woman']);
+      }
+    }
 
     if(!empty($post['fields']['date_and_time_of_arrival_from'])) {
       $date_and_time_of_arrival_from = \Yii::$app->formatter->asDate($post['fields']['date_and_time_of_arrival_from'], 'php:Y-m-d');
@@ -90,6 +99,27 @@ class ApiController extends ActiveController {
       $date_and_time_of_arrival_before = \Yii::$app->formatter->asDate($post['fields']['date_and_time_of_arrival_before'], 'php:Y-m-d').' 23:59:59';
 
       $query->andWhere(['<=', 'date_and_time_of_arrival', $date_and_time_of_arrival_before]);
+    }
+
+    ///print_r($post['fields']); die();
+    if(!empty($post['fields']['birthday_date_from'])) {
+      $birthday_date_from = \Yii::$app->formatter->asDate($post['fields']['birthday_date_from'], 'php:Y-m-d');
+      $query->where(['>=', 'birthday_date', $birthday_date_from]);
+    }
+
+    if(!empty($post['fields']['birthday_date_before'])) {
+      $birthday_date_before = \Yii::$app->formatter->asDate($post['fields']['birthday_date_before'], 'php:Y-m-d').' 23:59:59';
+      $query->andWhere(['<=', 'birthday_date', $birthday_date_before]);
+    }
+
+    if(!empty($post['fields']['effect_of_thrombolysis'])) {
+      if(!empty($post['fields']['effect_of_thrombolysis']['no']) && empty($post['fields']['effect_of_thrombolysis']['yes'])) {
+        $query->where(['=', 'effect_of_thrombolysis', 'no']);
+      }
+
+      if(empty($post['fields']['effect_of_thrombolysis']['no']) && !empty($post['fields']['effect_of_thrombolysis']['yes'])) {
+        $query->where(['=', 'effect_of_thrombolysis', 'yes']);
+      }
     }
 
     if(!empty($post['fields']['fv'])) {
@@ -122,6 +152,7 @@ class ApiController extends ActiveController {
     if(!empty($post['sort']['active'])) {
       $query->orderBy([$post['sort']['active'] => (($post['sort']['direction'] == 'asc') ? SORT_ASC : SORT_DESC)]);
     }
+
     $res = $query->all();
     //print_r($date_and_time_of_arrival_from); die();
     return array(

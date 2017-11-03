@@ -31,7 +31,20 @@ export class ViewProtocolWithAcuteMyocardialInfarctionComponent implements OnIni
 
   public filter: object = {
     'date_and_time_of_arrival_from': '',
-    'date_and_time_of_arrival_before': ''
+    'date_and_time_of_arrival_before': '',
+    'birthday_date_from': '',
+    'birthday_date_before': '',
+    'gender': {},
+    'effect_of_thrombolysis': {}
+  }
+
+  public filterOriginal: object = {
+    'date_and_time_of_arrival_from': '',
+    'date_and_time_of_arrival_before': '',
+    'birthday_date_from': '',
+    'birthday_date_before': '',
+    'gender': {},
+    'effect_of_thrombolysis': {}
   }
 
   /*start chart*/
@@ -92,6 +105,10 @@ export class ViewProtocolWithAcuteMyocardialInfarctionComponent implements OnIni
       this.pageLength = res.pageLength;
       this.dataSource = new ExampleDataSource(res.rows, this.paginator, this, this.translate, this.sort);
     });
+  }
+
+  resetFilter() {
+    this.filter = this.filterOriginal;
   }
 
   tableRow(row, field) {

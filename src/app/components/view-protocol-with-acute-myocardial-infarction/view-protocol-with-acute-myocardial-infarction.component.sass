@@ -1,13 +1,17 @@
 .wrap-filter
   padding-bottom: 20px
 
-  .filter-button
-    padding: 0px
-    margin: 0px
-    border: 0
-    padding: 7px 14px
-    border-radius: 5px
-    outline: none
-    background-color: #337ab7
-    color: white
-    cursor: pointer
+  .filter
+    display: flex
+    flex-flow: wrap column
+
+    &__fields
+      display: flex
+      flex-wrap: wrap
+
+    &__title
+      font-weight: bold
+
+    &__buttons
+      align-self: flex-end
+

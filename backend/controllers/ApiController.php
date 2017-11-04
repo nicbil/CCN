@@ -110,7 +110,6 @@ class ApiController extends ActiveController {
       $query->andWhere(['<=', 'date_and_time_of_arrival', $date_and_time_of_arrival_before]);
     }
 
-    ///print_r($post['fields']); die();
     if(!empty($post['fields']['birthday_date_from'])) {
       $birthday_date_from = \Yii::$app->formatter->asDate($post['fields']['birthday_date_from'], 'php:Y-m-d');
       $query->where(['>=', 'birthday_date', $birthday_date_from]);
@@ -132,24 +131,7 @@ class ApiController extends ActiveController {
     }
 
     if(!empty($post['fields']['fv'])) {
-      if($post['fields']['fv'] == 30) {
-        $query->where(['<=', 'fv', $post['fields']['fv']]);
-      }
-
-      if($post['fields']['fv'] == 40) {
-        $query->where(['>=', 'fv', 30]);
-        $query->andWhere(['<=', 'fv', $post['fields']['fv']]);
-      }
-
-      if($post['fields']['fv'] == 50) {
-        $query->where(['>=', 'fv', 40]);
-        $query->andWhere(['<=', 'fv', $post['fields']['fv']]);
-      }
-
-      if($post['fields']['fv'] == 70) {
-        $query->where(['>=', 'fv', 50]);
-        $query->andWhere(['<=', 'fv', $post['fields']['fv']]);
-      }
+      $query->where(['fv' => $post['fields']['fv']]);
     }
 
     $query->limit($post['pagination']['pageSize']);

@@ -52,6 +52,9 @@ export class ViewProtocolWithAcuteMyocardialInfarctionComponent implements OnIni
     [65, 59, 80, 81, 56],
     [28, 48, 40, 19, 86],
     [1, 50, 19, 10, 100],
+    [1, 50, 19, 10, 100],
+    [1, 50, 29, 10, 10],
+
   ];
   public lineChartLabels:Array<any> = [this.translate.instant('lang_76'), this.translate.instant('lang_77'), this.translate.instant('lang_78'), this.translate.instant('lang_79'), this.translate.instant('lang_80')];
   public lineChartType:string = 'line';

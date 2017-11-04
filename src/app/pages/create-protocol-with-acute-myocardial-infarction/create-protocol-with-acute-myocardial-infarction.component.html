@@ -364,10 +364,10 @@
     <div class="title">{{'lang_10' | translate}}</div>
     <mat-form-field *ngFor="let lvgHC of tables.lvgHorizontalCount; let horizontalI = index;">
       <mat-select placeholder="{{lvgHC | translate}}" [(ngModel)]="protocol.lvg[horizontalI]" name="lvg_{{horizontalI}}">
-        <mat-option value="normakinez">{{'normakinez' | translate}}</mat-option>
-        <mat-option value="gipokinez">{{'gipokinez' | translate}}</mat-option>
-        <mat-option value="akinez">{{'akinez' | translate}}</mat-option>
-        <mat-option value="diskinez">{{'diskinez' | translate}}</mat-option>
+        <mat-option value="1">{{'normakinez' | translate}}</mat-option>
+        <mat-option value="2">{{'gipokinez' | translate}}</mat-option>
+        <mat-option value="3">{{'akinez' | translate}}</mat-option>
+        <mat-option value="4">{{'diskinez' | translate}}</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -381,10 +381,14 @@
     </mat-form-field>
   </form>
 </div>
-
+{{protocol.autocomplete}}
 <div class="wrap-footer" [ngClass]="[protocolForm.valid ? '' : 'hide']">
   <div class="footer">
-    <button class='save-button' (click)="saveForm(protocolForm)">{{'lang_100' | translate}}</button>
+    <mat-checkbox *ngIf="protocol.autocompleteCheckboxShow" [(ngModel)]="protocol.autocompleteParent" name="autocompleteParent">
+      {{'lang_69' | translate}}
+    </mat-checkbox>
+
+    <button class='btn btn-primary' (click)="saveForm(protocolForm)">{{'lang_100' | translate}}</button>
   </div>
 </div>
 

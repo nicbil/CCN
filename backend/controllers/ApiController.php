@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use phpDocumentor\Reflection\Types\Null_;
 use Yii;
 use yii\web\Controller;
 use yii\rest\ActiveController;
@@ -52,27 +53,35 @@ class ApiController extends ActiveController {
       \Yii::$app->formatter->asDate($post['birthday_date'], 'php:Y-m-d') : '00-00-00';
 
     if(!empty($post['id'])) {
+      $parentId = $post['id'];
+
+      if(!empty($post['autocompleteParent'])) {
+        $post['parent_id'] = $parentId;
+      }
       unset($post['id']);
     }
 
-    foreach (['date_and_time_of_arrival', 'date_time_death'] as $field) {
+    foreach (['date_and_time_of_arrival', 'date_and_time_of_death'] as $field) {
       if(!empty($post[$field])) {
         $date_time = explode(' ', $post[$field]);
-        $post[$field] = \Yii::$app->formatter->asDate($date_time[1], 'php:Y-m-d') . ' ' .
-          $date_time[0] . ':00';
+        $post[$field] = \Yii::$app->formatter->asDate($date_time[1], 'php:Y-m-d') . ' ' . $date_time[0] . ':00';
       } else {
-        $post[$field] = '00:00:00 00-00-0000';
+        $post[$field] = NULL;
       }
     }
 
-    //print_r($post); die();
     $model = new AcuteMyocardialInfarctionSt();
     $data = array('AcuteMyocardialInfarctionSt' => $post);
 
     if ($model->load($data) && $model->save()) {
+      if(!empty($post['autocompleteParent'])) {
+        $this->upParentProtocolInfarctionST($parentId, $model->id);
+      }
       return(object)['success' => true];
     }
-    return (object)['success' => false];
+    return (object)[
+      'success' => false
+    ];
   }
 
   public function actionGet_protocol_infarction_st() {
@@ -174,5 +183,27 @@ class ApiController extends ActiveController {
     }
 
     return array('rows' => !empty($res) ? $res : []);
+  }
+
+  public function getProtocolInfarctionST($id) {
+    $query = AcuteMyocardialInfarctionSt::find();
+    $query->where(['=', 'id', $id]);
+
+    return $query->all();
+  }
+
+  public function upParentProtocolInfarctionST($parentId, $currentId) {
+    $parentProtocol = $this->getProtocolInfarctionST($parentId);
+
+    if(!empty($parentProtocol[0]) && !empty($parentProtocol[0]['parent_ids'])) {
+      $parentIdsArr = (array)json_decode($parentProtocol[0]['parent_ids']);
+      $parentIdsArr[count($parentIdsArr)] = $currentId;
+
+      $parent_ids = json_encode($parentIdsArr);
+    } else {
+      $parent_ids = json_encode((object)[0 => $currentId]);
+    }
+
+    AcuteMyocardialInfarctionSt::updateAll(['parent_ids' => $parent_ids], ['=', 'id', $parentId]);
   }
 }

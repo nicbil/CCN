@@ -11,6 +11,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import {split} from "ts-node/dist";
+import {number} from "ng2-validation/dist/number";
 
 @Component({
   selector: 'app-create-protocol-with-acute-myocardial-infarction',
@@ -80,7 +81,9 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
     cause_of_death: '',
     operator: '',
     date_and_time_of_death: '12:50 13-10-2099',
-    fv: ''
+    fv: '',
+    autocompleteCheckboxShow: false,
+    autocompleteParent: false
   };
   filteredOptionsAutocomplete: Observable<string[]>;
   autocompleteControl: FormControl = new FormControl();
@@ -108,7 +111,8 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
     this.protocol = Object.assign({}, data);
     this.protocol['birthday_date'] = this.transformDate(this.protocol['birthday_date'], true);
     this.protocol['date_and_time_of_arrival'] = this.transformDate(this.protocol['date_and_time_of_arrival'], false);
-    this.protocol['date_and_time_of_death'] = this.transformDate(this.protocol['date_and_time_of_death'], true);
+    this.protocol['date_and_time_of_death'] = this.transformDate(this.protocol['date_and_time_of_death'], false);
+    this.protocol['autocompleteCheckboxShow'] = true;
 
     this.transformToStringify.forEach((item) => {
       this.protocol[item] = JSON.parse(this.protocol[item]);

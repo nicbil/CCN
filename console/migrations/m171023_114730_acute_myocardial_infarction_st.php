@@ -40,7 +40,9 @@ class m171023_114730_acute_myocardial_infarction_st extends Migration
             'fv' => 'text NOT NULL',
             'cause_of_death' => 'text NOT NULL',
             'operator' => 'text NOT NULL',
-            'date_and_time_of_death' => 'datetime NULL DEFAULT NULL'
+            'date_and_time_of_death' => 'datetime NULL DEFAULT NULL',
+            'parent_id' => 'int(11)',
+            'parent_ids' => 'text NOT NULL',
         ], $tableOptions);
     }
 

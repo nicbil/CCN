@@ -32,8 +32,10 @@
                [(ngModel)]="protocol.patronymic" name="patronymic">
 
         <mat-autocomplete #patronymic="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptionsAutocomplete | async" [value]="option.patronymic" (click)="applyAutocomplete(option)">
-            {{ option.first_name }} {{ option.last_name }} {{ option.patronymic }} - {{ transformDate(option.birthday_date, true) }}
+          <mat-option *ngFor="let option of filteredOptionsAutocomplete | async"
+                      [value]="option.patronymic"
+                      (onSelectionChange)="applyAutocomplete(option)">
+            {{ transformDate(option.birthday_date, true) }} - {{ option.first_name }} {{ option.last_name }} {{ option.patronymic }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
@@ -388,6 +390,7 @@
       {{'lang_69' | translate}}
     </mat-checkbox>
 
+    <button class='btn btn-secondary' (click)="cancel(protocolForm)">{{'lang_72' | translate}}</button>
     <button class='btn btn-primary' (click)="saveForm(protocolForm)">{{'lang_100' | translate}}</button>
   </div>
 </div>

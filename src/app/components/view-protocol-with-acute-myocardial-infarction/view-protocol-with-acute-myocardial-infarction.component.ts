@@ -28,23 +28,14 @@ export class ViewProtocolWithAcuteMyocardialInfarctionComponent implements OnIni
   public pageSizeOptions: any = [5, 10, 25, 100];
   public active: any = '';
   public direction: any = '';
-
   public filter: object = {
     'date_and_time_of_arrival_from': '',
     'date_and_time_of_arrival_before': '',
     'birthday_date_from': '',
     'birthday_date_before': '',
     'gender': {},
-    'effect_of_thrombolysis': {}
-  }
-
-  public filterOriginal: object = {
-    'date_and_time_of_arrival_from': '',
-    'date_and_time_of_arrival_before': '',
-    'birthday_date_from': '',
-    'birthday_date_before': '',
-    'gender': {},
-    'effect_of_thrombolysis': {}
+    'effect_of_thrombolysis': {},
+    'fv': []
   }
 
   /*start chart*/
@@ -101,17 +92,15 @@ export class ViewProtocolWithAcuteMyocardialInfarctionComponent implements OnIni
       }
     };
 
-    console.log(data);
     this.httpService.Http(JSON.stringify(data), 'get_protocol_infarction_st')
-    .subscribe(res => {
-      console.log(res);
-      this.pageLength = res.pageLength;
-      this.dataSource = new ExampleDataSource(res.rows, this.paginator, this, this.translate, this.sort);
-    });
+      .subscribe(res => {
+        this.pageLength = res.pageLength;
+        this.dataSource = new ExampleDataSource(res.rows, this.paginator, this, this.translate, this.sort);
+      });
   }
 
-  resetFilter() {
-    this.filter = this.filterOriginal;
+  resetFilter(filterForm) {
+    filterForm.reset();
   }
 
   tableRow(row, field) {

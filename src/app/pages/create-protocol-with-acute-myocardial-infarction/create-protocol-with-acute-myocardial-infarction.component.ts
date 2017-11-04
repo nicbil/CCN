@@ -143,6 +143,7 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
       .subscribe(res => {
         if (res.success) {
           this.responseAfterSave = {'success': true};
+          this.cancel(form);
         } else {
           this.responseAfterSave = {'error': true};
         }
@@ -150,5 +151,10 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
     } else {
       this.responseAfterSave = {'error': true};
     }
+  }
+
+  cancel(form) {
+    form.reset();
+    this.autocompleteControl.reset();
   }
 }

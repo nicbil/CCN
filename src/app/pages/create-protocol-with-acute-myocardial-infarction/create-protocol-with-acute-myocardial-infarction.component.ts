@@ -154,7 +154,28 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
   }
 
   cancel(form) {
+    let that = this;
     form.reset();
     this.autocompleteControl.reset();
+
+    let defaultValuesOfForm = function() {
+      that.protocol['date_and_time_of_arrival'] = that.datePipe.transform(new Date(), 'H:mm')+' '+that.datePipe.transform(new Date(), 'dd-MM-yyyy');
+      that.protocol['birthday_date'] = '11-08-1989';
+      that.protocol['gender'] = 'man';
+      that.protocol['effect_of_thrombolysis'] = 'no';
+      that.protocol['thrombolysis']['type'] = 'no';
+      that.protocol['continuing_pain'] = 'no';
+      that.protocol['increase_segment_st'] = 'no';
+      that.protocol['thrombaspiration'] = 'thrombus_not_received';
+      that.protocol['blood_timi_before'] = '0';
+      that.protocol['blood_timi_after'] = '0';
+      that.protocol['date_and_time_of_death'] = '12:50 13-10-2099';
+      that.protocol['autocompleteCheckboxShow'] = false;
+      that.protocol['autocompleteParent'] = false;
+    }
+
+    setTimeout(function() {
+      defaultValuesOfForm();
+    }, 100);
   }
 }

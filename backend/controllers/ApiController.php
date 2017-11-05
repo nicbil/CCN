@@ -156,12 +156,12 @@ class ApiController extends ActiveController {
     $post = json_decode(trim(file_get_contents('php://input')), true);
 
     if(!empty($post['first_name']) && !empty($post['last_name']) && !empty($post['patronymic'])) {
-      $query = AcuteMyocardialInfarctionSt::find();
-
-      $query->andFilterWhere(['like', 'first_name', $post['first_name']]);
-      $query->andFilterWhere(['like', 'last_name', $post['last_name']]);
-      $query->andFilterWhere(['like', 'patronymic', $post['patronymic']]);
-      $res = $query->all();
+      $res = AcuteMyocardialInfarctionSt::find()
+        ->where(['IS', 'parent_id', NULL])
+        ->andwhere(['like', 'first_name', $post['first_name']])
+        ->andwhere(['like', 'last_name', $post['last_name']])
+        ->andwhere(['like', 'patronymic', $post['patronymic']])
+        ->all();
     }
 
     return array('rows' => !empty($res) ? $res : []);

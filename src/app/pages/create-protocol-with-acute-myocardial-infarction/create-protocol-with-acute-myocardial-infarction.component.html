@@ -404,3 +404,13 @@
   <a class="close" (click)="responseAfterSave['success'] = false">&times;</a>
   <strong>{{'lang_103' | translate}} </strong> {{'lang_104' | translate}}
 </div>
+
+<div class="shadow" *ngIf="progressSpinnerActive">
+  <div class="progress-spinner">
+    <mat-progress-spinner class="example-margin"
+                          [color]="dataService.spinner.color"
+                          [mode]="dataService.spinner.mode"
+                          [value]="dataService.spinner.value">
+    </mat-progress-spinner>
+  </div>
+</div>

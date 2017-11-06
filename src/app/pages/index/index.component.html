@@ -1,4 +1,14 @@
 <app-main-menu></app-main-menu>
 <div class="wrap-body">
-  <app-view-protocol-with-acute-myocardial-infarction></app-view-protocol-with-acute-myocardial-infarction>
+  <app-view-protocol-with-acute-myocardial-infarction (spinner)="spinner($event)"></app-view-protocol-with-acute-myocardial-infarction>
+</div>
+
+<div class="shadow" *ngIf="progressSpinnerActive">
+  <div class="progress-spinner">
+    <mat-progress-spinner class="example-margin"
+                          [color]="dataService.spinner.color"
+                          [mode]="dataService.spinner.mode"
+                          [value]="dataService.spinner.value">
+    </mat-progress-spinner>
+  </div>
 </div>

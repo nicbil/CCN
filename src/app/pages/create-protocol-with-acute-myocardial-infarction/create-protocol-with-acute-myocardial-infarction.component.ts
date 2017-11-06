@@ -88,7 +88,7 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
   filteredOptionsAutocomplete: Observable<string[]>;
   autocompleteControl: FormControl = new FormControl();
   responseAfterSave: object = {};
-
+  progressSpinnerActive: boolean = false;
   constructor(private datePipe: DatePipe, private httpService: HttpService, private dataService: DataService) {}
   ngOnInit() {
     this.filteredOptionsAutocomplete = this.autocompleteControl.valueChanges
@@ -98,6 +98,9 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
       .switchMap(searchLine => this.searchAutocomplete(searchLine));
   }
 
+  spinner(active) {
+    this.progressSpinnerActive = active;
+  }
   searchAutocomplete(searchLine) {
     if (searchLine) {
       return this.httpService.Http(this.protocol, 'auto_complete_protocol_infarction_st').map(protocols => {
@@ -134,6 +137,7 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
   saveForm(form) {
     this.responseAfterSave = {};
     if (form.valid) {
+      this.spinner(true);
       const dataProtocol = Object.assign({}, this.protocol);
       this.transformToStringify.forEach((item) => {
         dataProtocol[item] = JSON.stringify(dataProtocol[item]);
@@ -147,6 +151,7 @@ export class CreateProtocolWithAcuteMyocardialInfarctionComponent implements OnI
         } else {
           this.responseAfterSave = {'error': true};
         }
+        this.spinner(false);
       });
     } else {
       this.responseAfterSave = {'error': true};

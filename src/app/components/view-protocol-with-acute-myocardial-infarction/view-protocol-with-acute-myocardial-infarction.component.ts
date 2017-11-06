@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {MatPaginator, MatSort} from '@angular/material';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
@@ -74,12 +74,14 @@ export class ViewProtocolWithAcuteMyocardialInfarctionComponent implements OnIni
   dataSource: ExampleDataSource | null;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @Output() spinner = new EventEmitter<boolean>();
 
   ngOnInit() {
     this.showTable();
   }
 
   showTable() {
+    this.spinner.emit(true);
     const data = {
       'fields': this.filter,
       'pagination': {
@@ -96,6 +98,7 @@ export class ViewProtocolWithAcuteMyocardialInfarctionComponent implements OnIni
       .subscribe(res => {
         this.pageLength = res.pageLength;
         this.dataSource = new ExampleDataSource(res.rows, this.paginator, this, this.translate, this.sort);
+        this.spinner.emit(false);
       });
   }
 

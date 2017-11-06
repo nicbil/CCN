@@ -24,8 +24,8 @@ export interface UserData {
 export class ViewProtocolWithAcuteMyocardialInfarctionComponent implements OnInit {
   public pageLength: any = 100;
   public pageIndex: any = 0;
-  public pageSize: any = 5;
-  public pageSizeOptions: any = [5, 10, 25, 100];
+  public pageSize: any = 100;
+  public pageSizeOptions: any = [5, 10, 25, 100, 250, 500, 1000];
   public active: any = '';
   public direction: any = '';
   public filter: object = {
@@ -38,36 +38,21 @@ export class ViewProtocolWithAcuteMyocardialInfarctionComponent implements OnIni
     'fv': []
   }
 
-  /*start chart*/
-  public lineChartData:Array<any> = [
-    [65, 59, 80, 81, 56],
-    [28, 48, 40, 19, 86],
-    [1, 50, 19, 10, 100],
-    [1, 50, 19, 10, 100],
-    [1, 50, 29, 10, 10],
-
+  public barChartOptions:any = {
+    scaleShowVerticalLines: true,
+    responsive: true
+  };
+  public barChartData:any[] = [
+    {data: [0, 0, 0, 0, 0], label: this.translate.instant('normakinez')},
+    {data: [0, 0, 0, 0, 0], label: this.translate.instant('gipokinez')},
+    {data: [0, 0, 0, 0, 0], label: this.translate.instant('akinez')},
+    {data: [0, 0, 0, 0, 0], label: this.translate.instant('diskinez')}
   ];
-  public lineChartLabels:Array<any> = [this.translate.instant('lang_76'), this.translate.instant('lang_77'), this.translate.instant('lang_78'), this.translate.instant('lang_79'), this.translate.instant('lang_80')];
-  public lineChartType:string = 'line';
-  public pieChartType:string = 'pie';
 
-  // Pie
-  public pieChartLabels:string[] = [this.translate.instant('normakinez'), this.translate.instant('gipokinez'), this.translate.instant('akinez')];
-  public pieChartData:number[] = [300, 500, 100];
+  public barChartType:string = 'bar';
+  public barChartLegend:boolean = true;
+  public barChartLabels:string[] = [this.translate.instant('lang_76'), this.translate.instant('lang_77'), this.translate.instant('lang_78'), this.translate.instant('lang_79'), this.translate.instant('lang_80')];
 
-  public randomizeType():void {
-    this.lineChartType = this.lineChartType === 'line' ? 'bar' : 'line';
-    this.pieChartType = this.pieChartType === 'doughnut' ? 'pie' : 'doughnut';
-  }
-
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
-
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
-  /*end*/
   constructor(private dataService: DataService, private httpService: HttpService, private translate: TranslateService) { }
   displayedColumns = ['first_name', 'last_name', 'patronymic', 'birthday_date', 'gender', 'fv', 'date_and_time_of_arrival'];
   lineTranslationOfTable = ['man'];
@@ -96,14 +81,35 @@ export class ViewProtocolWithAcuteMyocardialInfarctionComponent implements OnIni
 
     this.httpService.Http(JSON.stringify(data), 'get_protocol_infarction_st')
       .subscribe(res => {
-        this.pageLength = res.pageLength;
-        this.dataSource = new ExampleDataSource(res.rows, this.paginator, this, this.translate, this.sort);
+        if (res.pageLength) {
+          this.pageLength = res.pageLength;
+          this.renderLVGChart(res);
+          this.dataSource = new ExampleDataSource(res.rows, this.paginator, this, this.translate, this.sort);
+        }
         this.spinner.emit(false);
       });
   }
 
   resetFilter(filterForm) {
     filterForm.reset();
+  }
+
+  renderLVGChart(data) {
+    this.barChartData = [
+      {data: [0, 0, 0, 0, 0], label: this.translate.instant('normakinez')},
+      {data: [0, 0, 0, 0, 0], label: this.translate.instant('gipokinez')},
+      {data: [0, 0, 0, 0, 0], label: this.translate.instant('akinez')},
+      {data: [0, 0, 0, 0, 0], label: this.translate.instant('diskinez')}
+    ];
+
+    data.rows.forEach((item, index) => {
+      const lvg = JSON.parse(item.lvg);
+      if (Object.keys(lvg).length) {
+        for (let index in lvg) {
+          this.barChartData[lvg[index]-1]['data'][index] += 1;
+        }
+      }
+    });
   }
 
   tableRow(row, field) {

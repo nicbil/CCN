@@ -12,21 +12,21 @@
           {{'lang_67' | translate}}&nbsp;
           <mat-form-field class="wrap-date">
             <input matInput [(ngModel)]='filter.date_and_time_of_arrival_from' id="date_and_time_of_arrival_from"
-              name="date_and_time_of_arrival_from"
-              #arrival_date="ngModel"
-              placeholder="{{'lang_66' | translate}}"
-              [textMask]="{mask: dataService.maskDate}"
-              [pattern]="dataService.patternDate">
+                   name="date_and_time_of_arrival_from"
+                   #arrival_date="ngModel"
+                   placeholder="{{'lang_66' | translate}}"
+                   [textMask]="{mask: dataService.maskDate}"
+                   [pattern]="dataService.patternDate">
           </mat-form-field>
 
           {{'lang_68' | translate}}&nbsp;
           <mat-form-field class="wrap-date">
             <input matInput [(ngModel)]='filter.date_and_time_of_arrival_before' id="date_and_time_of_arrival_before"
-              name="date_and_time_of_arrival_before"
-              #arrival_date="ngModel"
-              placeholder="{{'lang_66' | translate}}"
-              [textMask]="{mask: dataService.maskDate}"
-              [pattern]="dataService.patternDate">
+                   name="date_and_time_of_arrival_before"
+                   #arrival_date="ngModel"
+                   placeholder="{{'lang_66' | translate}}"
+                   [textMask]="{mask: dataService.maskDate}"
+                   [pattern]="dataService.patternDate">
           </mat-form-field>
         </div>
 
@@ -91,6 +91,21 @@
   </mat-expansion-panel>
 </div>
 
+<div class="row">
+  <div class="col-md-12">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+    </canvas>
+  </div>
+</div>
+<br><br><br>
+
 <div class="example-container mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="{{field}}" *ngFor="let field of displayedColumns">
@@ -108,32 +123,4 @@
    [pageSize]="pageSize"
    [pageSizeOptions]="pageSizeOptions">
   </mat-paginator>
-</div>
-<br><br><br>
-
-<div class="row">
-  <div class="col-md-12">
-    <canvas baseChart
-      [data]="lineChartData"
-      [labels]="lineChartLabels"
-      [options]="lineChartOptions"
-      [chartType]="lineChartType"
-      (chartHover)="chartHovered($event)"
-      (chartClick)="chartClicked($event)">
-    </canvas>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-<!--    <canvas baseChart
-      [data]="pieChartData"
-      [labels]="pieChartLabels"
-      [chartType]="pieChartType"
-      (chartHover)="chartHovered($event)"
-      (chartClick)="chartClicked($event)">
-    </canvas>-->
-  </div>
-</div>
-<div class="col-md-12 text-center" style="margin-top: 10px;height: 50%">
-  <button (click)="randomizeType()" style="display: inline-block">Toggle</button>
 </div>

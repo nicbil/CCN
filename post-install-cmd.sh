@@ -10,4 +10,4 @@ php yii migrate/up --interactive=0
 #composer self-update
 #composer global require "fxp/composer-asset-plugin:*"
 #composer install
-#php yii migrate/redo 1 --interactive=0
+php yii migrate/redo 1 --interactive=0

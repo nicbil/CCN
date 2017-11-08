@@ -8,7 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatInputModule, MatRadioModule,
 MatNativeDateModule, MatDatepickerModule, MatSelectModule, MatMenuModule,
 MatAutocompleteModule, MatTableModule, MatPaginatorModule, MatExpansionModule,
-MatSortModule, MatProgressSpinnerModule } from '@angular/material';
+MatSortModule, MatProgressSpinnerModule, MatTabsModule } from '@angular/material';
 import { TextMaskModule } from 'angular2-text-mask';
 import { RestrictInputDirective } from './restrictinput.directive';
 import { CustomFormsModule } from 'ng2-validation';
@@ -58,6 +58,7 @@ import { UpdateProtocolWithAcuteMyocardialInfarctionComponent } from './pages/up
     MatPaginatorModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
     TextMaskModule,
     CustomFormsModule,
     ReactiveFormsModule,

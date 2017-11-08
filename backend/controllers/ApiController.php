@@ -70,21 +70,32 @@ class ApiController extends ActiveController {
       }
     }
 
-    $model = new AcuteMyocardialInfarctionSt();
-    $data = array('AcuteMyocardialInfarctionSt' => $post);
-
-    if ($model->load($data) && $model->save()) {
-      if(!empty($post['autocompleteParent'])) {
-        $this->upParentProtocolInfarctionST($parentId, $model->id);
+    if(!empty($post['update'])) {
+      $update = $post['update'];
+      unset($post['autocompleteCheckboxShow']);
+      unset($post['update']);
+      $res_update = AcuteMyocardialInfarctionSt::updateAll($post, ['=', 'id', $update]);
+      if($res_update) {
+        return (object)['success' => true];
       }
-      return(object)['success' => true];
+    } else {
+      $model = new AcuteMyocardialInfarctionSt();
+      $data = array('AcuteMyocardialInfarctionSt' => $post);
+
+      if ($model->load($data) && $model->save()) {
+        if (!empty($post['autocompleteParent'])) {
+          $this->upParentProtocolInfarctionST($parentId, $model->id);
+        }
+        return (object)['success' => true];
+      }
     }
+
     return (object)[
       'success' => false
     ];
   }
 
-  public function actionGet_protocol_infarction_st() {
+  public function actionFilter_protocol_infarction_st() {
     $post = json_decode(trim(file_get_contents('php://input')), true);
     $query = AcuteMyocardialInfarctionSt::find();
 
@@ -172,6 +183,19 @@ class ApiController extends ActiveController {
     $query->where(['=', 'id', $id]);
 
     return $query->all();
+  }
+
+  public function actionGet_protocol_infarction_st() {
+    $post = json_decode(trim(file_get_contents('php://input')), true);
+
+    if (!empty($post['id'])) {
+      $query = AcuteMyocardialInfarctionSt::find();
+      $query->where(['=', 'id', $post['id']]);
+
+      return $query->all();
+    }
+
+    return [];
   }
 
   public function upParentProtocolInfarctionST($parentId, $currentId) {

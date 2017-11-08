@@ -129,5 +129,6 @@ export const LANG_RU_TRANS = {
   'itemsPerPageLabel': 'Элементов на странице',
   'nextPageLabel': 'Следущая страница',
   'previousPageLabel': 'Предыдущая страница',
-  'lang_105': 'Отправить'
+  'lang_105': 'Отправить',
+  'controls': ' ',
 };

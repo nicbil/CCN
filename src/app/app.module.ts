@@ -20,6 +20,8 @@ import { NgDatepickerModule } from 'ng2-datepicker';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { ChartsModule } from 'ng2-charts';
 import { ViewProtocolWithAcuteMyocardialInfarctionComponent } from './components/view-protocol-with-acute-myocardial-infarction/view-protocol-with-acute-myocardial-infarction.component';
+import { ProtocolAcuteMyocardialInfarctionComponent } from './components/protocol-acute-myocardial-infarction/protocol-acute-myocardial-infarction.component';
+import { UpdateProtocolWithAcuteMyocardialInfarctionComponent } from './pages/update-protocol-with-acute-myocardial-infarction/update-protocol-with-acute-myocardial-infarction.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ViewProtocolWithAcuteMyocardialInfarctionComponent } from './components
     IndexComponent,
     MainMenuComponent,
     ViewProtocolWithAcuteMyocardialInfarctionComponent,
+    ProtocolAcuteMyocardialInfarctionComponent,
+    UpdateProtocolWithAcuteMyocardialInfarctionComponent,
   ],
   imports: [
     NgbModule.forRoot(),

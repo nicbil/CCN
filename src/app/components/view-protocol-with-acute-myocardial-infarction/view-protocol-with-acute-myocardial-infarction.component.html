@@ -110,7 +110,18 @@
   <mat-table #table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="{{field}}" *ngFor="let field of displayedColumns">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{field | translate}} </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{ tableRow(row, field)}} </mat-cell>
+
+      <ng-container *ngIf="field !== 'controls'">
+        <mat-cell *matCellDef="let row"> {{ tableRow(row, field)}} </mat-cell>
+      </ng-container>
+
+      <ng-container *ngIf="field === 'controls'">
+        <mat-cell *matCellDef="let row">
+          <a href="/update_protocol_with_acute_myocardial_infarction?id={{row['id']}}">
+            <i class="material-icons">&#xE254;</i>
+          </a>
+        </mat-cell>
+      </ng-container>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

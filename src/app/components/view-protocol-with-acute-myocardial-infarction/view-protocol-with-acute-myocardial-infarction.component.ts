@@ -54,7 +54,7 @@ export class ViewProtocolWithAcuteMyocardialInfarctionComponent implements OnIni
   public barChartLabels:string[] = [this.translate.instant('lang_76'), this.translate.instant('lang_77'), this.translate.instant('lang_78'), this.translate.instant('lang_79'), this.translate.instant('lang_80')];
 
   constructor(private dataService: DataService, private httpService: HttpService, private translate: TranslateService) { }
-  displayedColumns = ['first_name', 'last_name', 'patronymic', 'birthday_date', 'gender', 'fv', 'date_and_time_of_arrival'];
+  displayedColumns = ['first_name', 'last_name', 'patronymic', 'birthday_date', 'gender', 'fv', 'date_and_time_of_arrival', 'controls'];
   lineTranslationOfTable = ['man'];
   dataSource: ExampleDataSource | null;
   @ViewChild(MatSort) sort: MatSort;
@@ -79,7 +79,7 @@ export class ViewProtocolWithAcuteMyocardialInfarctionComponent implements OnIni
       }
     };
 
-    this.httpService.Http(JSON.stringify(data), 'get_protocol_infarction_st')
+    this.httpService.Http(JSON.stringify(data), 'filter_protocol_infarction_st')
       .subscribe(res => {
         if (res.pageLength) {
           this.pageLength = res.pageLength;

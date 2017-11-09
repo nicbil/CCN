@@ -57,8 +57,8 @@ class AcuteMyocardialInfarctionSt extends \yii\db\ActiveRecord
         [['date_and_time_of_arrival', 'first_name', 'last_name', 'patronymic', 'birthday_date', 'killip_type', 'ecg', 'stenosis_diameter_ica_before_chkv', 'stenosis_diameter_ica_after_chkv'], 'required'],
         [['id', 'killip_type', 'blood_timi_before', 'blood_timi_after', 'stenosis_diameter_ica_before_chkv', 'stenosis_diameter_ica_after_chkv', 'parent_id'], 'integer'],
         [['date_and_time_of_arrival', 'birthday_date', 'date_and_time_of_death'], 'safe'],
-        [['gender', 'delivered', 'effect_of_thrombolysis', 'thrombolysis', 'ecg', 'time_intervals', 'continuing_pain', 'increase_segment_st', 'thrombaspiration', 'additionally', 'type_interventions', 'lka', 'pka', 'lvg', 'fv', 'cause_of_death', 'operator', 'parent_ids'], 'string'],
-        [['first_name', 'last_name', 'patronymic'], 'string', 'max' => 100],
+        [['gender', 'delivered', 'effect_of_thrombolysis', 'thrombolysis', 'ecg', 'time_intervals', 'continuing_pain', 'increase_segment_st', 'thrombaspiration', 'additionally', 'type_interventions', 'lka', 'pka', 'lvg', 'fv', 'cause_of_death', 'operator', 'parent_ids', 'address', 'cd', 'ad'], 'string'],
+        [['first_name', 'last_name', 'patronymic', 'phone'], 'string', 'max' => 100],
       ];
     }
 

@@ -1,6 +1,6 @@
 <div class="wrap-body">
   <form class="wrap-form" #protocolForm="ngForm" (ngSubmit)="saveForm(protocolForm)">
-    <mat-tab-group>
+    <mat-tab-group [selectedIndex]="0">
       <mat-tab label="{{'lang_96' | translate}}">
         <div>
           <div>
@@ -14,66 +14,127 @@
             </mat-form-field>
           </div>
 
-          <mat-form-field>
-            <input matInput [(ngModel)]="protocol.first_name" name="first_name" placeholder="{{'first_name' | translate}}" required>
-          </mat-form-field>
+          <div style="display: flex; flex-wrap: wrap; align-items: center;">
+            <div>
+              <mat-form-field>
+                <input matInput [(ngModel)]="protocol.first_name" name="first_name" placeholder="{{'first_name' | translate}}" required>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="">
+                <input matInput [(ngModel)]="protocol.last_name" name="last_name" placeholder="{{'last_name' | translate}}" required>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="example-full-width">
+                <input type="text"
+                       placeholder="{{'patronymic' | translate}}"
+                       matInput
+                       [formControl]="autocompleteControl"
+                       [matAutocomplete]="patronymic"
+                       [(ngModel)]="protocol.patronymic" name="patronymic">
 
-          <mat-form-field class="">
-            <input matInput [(ngModel)]="protocol.last_name" name="last_name" placeholder="{{'last_name' | translate}}" required>
-          </mat-form-field>
+                <mat-autocomplete #patronymic="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptionsAutocomplete | async"
+                              [value]="option.patronymic"
+                              (onSelectionChange)="applyAutocomplete(option, true)">
+                    {{ transformDate(option.birthday_date, true) }} - {{ option.first_name }} {{ option.last_name }} {{ option.patronymic }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="wrap-date">
+                <input matInput [(ngModel)]='protocol.birthday_date' name="birthday_date" placeholder="{{'birthday_date' | translate}}"
+                       [textMask]="{mask: dataService.maskDate}"
+                       [pattern]="dataService.patternDate" required>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-radio-group class="wrap-gender" [(ngModel)]='protocol.gender' name="gender">
+                <mat-radio-button value="man" checked>{{'man' | translate}}</mat-radio-button>
+                <mat-radio-button value="woman">{{'women' | translate}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div>
+              <mat-form-field>
+                <input matInput [(ngModel)]='protocol.address' name="address" placeholder="{{'lang_21' | translate}}">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <input matInput [(ngModel)]='protocol.phone' name="phone" placeholder="{{'lang_70' | translate}}"
+                       [textMask]="{mask: dataService.maskPhone}">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <input matInput [(ngModel)]='protocol.delivered' name="delivered" placeholder="{{'lang_20' | translate}}">
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-select placeholder="{{'lang_43' | translate}}" [(ngModel)] = "protocol.killip_type" name="killip_type" required>
+                  <mat-option value="1">{{'lang_44' | translate}}</mat-option>
+                  <mat-option value="2">{{'lang_45' | translate}}</mat-option>
+                  <mat-option value="3">{{'lang_46' | translate}}</mat-option>
+                  <mat-option value="4">{{'lang_47' | translate}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <input type="text" placeholder="{{'ecg' | translate}}" matInput
+                       [(ngModel)] = "protocol.ecg" name="ecg"
+                       [matAutocomplete]="auto" required>
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option value="{{'lang_57' | translate}}">{{'lang_57' | translate}}</mat-option>
+                  <mat-option value="{{'lang_58' | translate}}">{{'lang_58' | translate}}</mat-option>
+                  <mat-option value="{{'lang_59' | translate}}">{{'lang_59' | translate}}</mat-option>
+                  <mat-option value="{{'lang_62' | translate}}">{{'lang_62' | translate}}</mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div style="display: flex">
+              <div class="wrap-radio">
+                <div class="title">{{'lang_71' | translate}}</div>
+                <mat-radio-group class="" [(ngModel)]='protocol.cd.offOn' name="cd">
+                  <mat-radio-button value="no" checked (click)="protocol.cd.type = ''">{{'lang_55' | translate}}</mat-radio-button>
+                  <mat-radio-button value="yes" (click)="protocol.cd.type = 1">{{'lang_56' | translate}}</mat-radio-button>
+                </mat-radio-group>
+              </div>
 
-          <mat-form-field class="example-full-width">
-            <input type="text"
-                   placeholder="{{'patronymic' | translate}}"
-                   matInput
-                   [formControl]="autocompleteControl"
-                   [matAutocomplete]="patronymic"
-                   [(ngModel)]="protocol.patronymic" name="patronymic">
+              <div class="wrap-radio" *ngIf="protocol.cd.offOn === 'yes'">
+                <div class="title">{{'lang_106' | translate}}</div>
+                <mat-radio-group class="" [(ngModel)]='protocol.cd.type' name="cd_type">
+                  <mat-radio-button value="1" checked>1</mat-radio-button>
+                  <mat-radio-button value="2">2</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+          </div>
 
-            <mat-autocomplete #patronymic="matAutocomplete">
-              <mat-option *ngFor="let option of filteredOptionsAutocomplete | async"
-                          [value]="option.patronymic"
-                          (onSelectionChange)="applyAutocomplete(option, true)">
-                {{ transformDate(option.birthday_date, true) }} - {{ option.first_name }} {{ option.last_name }} {{ option.patronymic }}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
+          <div>
+            <div class="title-input">{{'lang_107' | translate}}</div>
+            <mat-form-field>
+              <input matInput [(ngModel)]='protocol.ad.c_before' name="ad_c_before" placeholder="{{'lang_108' | translate}}"
+                     [min]="0" [max]="300">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [(ngModel)]='protocol.ad.d_before' name="ad_d_before" placeholder="{{'lang_109' | translate}}"
+                     [min]="0" [max]="150">
+            </mat-form-field>
 
-          <mat-form-field class="wrap-date">
-            <input matInput [(ngModel)]='protocol.birthday_date' name="birthday_date" placeholder="{{'birthday_date' | translate}}"
-                   [textMask]="{mask: dataService.maskDate}"
-                   [pattern]="dataService.patternDate" required>
-          </mat-form-field>
-
-          <mat-radio-group class="wrap-gender" [(ngModel)]='protocol.gender' name="gender">
-            <mat-radio-button value="man" checked>{{'man' | translate}}</mat-radio-button>
-            <mat-radio-button value="woman">{{'women' | translate}}</mat-radio-button>
-          </mat-radio-group>
-
-          <mat-form-field class="">
-            <input matInput [(ngModel)]='protocol.delivered' name="delivered" placeholder="{{'lang_20' | translate}}">
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-select placeholder="{{'lang_43' | translate}}" [(ngModel)] = "protocol.killip_type" name="killip_type" required>
-              <mat-option value="1">{{'lang_44' | translate}}</mat-option>
-              <mat-option value="2">{{'lang_45' | translate}}</mat-option>
-              <mat-option value="3">{{'lang_46' | translate}}</mat-option>
-              <mat-option value="4">{{'lang_47' | translate}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input type="text" placeholder="{{'ecg' | translate}}" matInput
-                   [(ngModel)] = "protocol.ecg" name="ecg"
-                   [matAutocomplete]="auto" required>
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option value="{{'lang_57' | translate}}">{{'lang_57' | translate}}</mat-option>
-              <mat-option value="{{'lang_58' | translate}}">{{'lang_58' | translate}}</mat-option>
-              <mat-option value="{{'lang_59' | translate}}">{{'lang_59' | translate}}</mat-option>
-              <mat-option value="{{'lang_62' | translate}}">{{'lang_62' | translate}}</mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
+            <span class="title-between-input">{{'lang_110' | translate}}</span>&nbsp;&nbsp;
+            <mat-form-field>
+              <input matInput [(ngModel)]='protocol.ad.c_after' name="ad_c_after" placeholder="{{'lang_108' | translate}}"
+                     [min]="0" [max]="300">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [(ngModel)]='protocol.ad.d_after' name="ad_d_after" placeholder="{{'lang_109' | translate}}"
+                     [min]="0" [max]="150">
+            </mat-form-field>
+          </div>
 
           <div style="display: flex">
             <div class="wrap-radio">
@@ -362,7 +423,7 @@
           </tbody>
         </table>
 
-        <div class="title">{{'lang_10' | translate}}</div>
+        <div class="title-input">{{'lang_10' | translate}}</div>
         <mat-form-field *ngFor="let lvgHC of tables.lvgHorizontalCount; let horizontalI = index;">
           <mat-select placeholder="{{lvgHC | translate}}" [(ngModel)]="protocol.lvg[horizontalI]" name="lvg_{{horizontalI}}">
             <mat-option value="1">{{'normakinez' | translate}}</mat-option>

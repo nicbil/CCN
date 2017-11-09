@@ -21,7 +21,7 @@ import {number} from "ng2-validation/dist/number";
 })
 
 export class ProtocolAcuteMyocardialInfarctionComponent implements OnInit {
-  transformToStringify: any[] = ['thrombolysis', 'ecg', 'time_intervals', 'lka', 'pka', 'lvg', 'additionally', 'type_interventions'];
+  transformToStringify: any[] = ['thrombolysis', 'ecg', 'time_intervals', 'lka', 'pka', 'lvg', 'additionally', 'type_interventions', 'ad', 'cd'];
   tables: object = {
     'time_intervals_vertical_count': ['onsetOfSymptoms', 'firstMedicalContact', 'ecg', 'enteringTheHospital',
       'ecgInTheHospital', 'fibrinolysisOrThrombolysis', 'arrivalInAngiography', 'restoringBloodFlow'],
@@ -83,6 +83,18 @@ export class ProtocolAcuteMyocardialInfarctionComponent implements OnInit {
     operator: '',
     date_and_time_of_death: '12:50 13-10-2099',
     fv: '',
+    address: '',
+    phone: '',
+    cd: {
+      offOn: 'no',
+      type: ''
+    },
+    ad: {
+      c_before: '',
+      d_before: '',
+      c_after: '',
+      d_after: '',
+    },
     autocompleteCheckboxShow: false,
     autocompleteParent: false,
     update: ''

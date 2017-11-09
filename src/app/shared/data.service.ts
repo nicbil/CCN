@@ -3,6 +3,7 @@ export class DataService {
   public maskTime: any[] = [/\d/, /\d/, ':', /\d/, /\d/];
   public maskDateTime: any[] = [/\d/, /\d/, ':', /\d/, /\d/, ' ', /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   public maskPercentage: any[] = [/\d/, /\d/, /\d/];
+  private maskPhone: any[] = ['+', '3', /\d/, /\d/, ' ', '(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
 
   public patternPercentage = /^[0-9]|[0-2][0-9]|3[0-6]$/;
   public patternDate: any = /^(0[1-9]|[12][0-9]|3[01])[-](0[1-9]|1[012])[-](19|20)\d\d$/;

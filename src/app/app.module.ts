@@ -22,6 +22,7 @@ import { ChartsModule } from 'ng2-charts';
 import { ViewProtocolWithAcuteMyocardialInfarctionComponent } from './components/view-protocol-with-acute-myocardial-infarction/view-protocol-with-acute-myocardial-infarction.component';
 import { ProtocolAcuteMyocardialInfarctionComponent } from './components/protocol-acute-myocardial-infarction/protocol-acute-myocardial-infarction.component';
 import { UpdateProtocolWithAcuteMyocardialInfarctionComponent } from './pages/update-protocol-with-acute-myocardial-infarction/update-protocol-with-acute-myocardial-infarction.component';
+import { ObjNgForPipe } from './shared/obj-ng-for.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { UpdateProtocolWithAcuteMyocardialInfarctionComponent } from './pages/up
     ViewProtocolWithAcuteMyocardialInfarctionComponent,
     ProtocolAcuteMyocardialInfarctionComponent,
     UpdateProtocolWithAcuteMyocardialInfarctionComponent,
+    ObjNgForPipe
   ],
   imports: [
     NgbModule.forRoot(),

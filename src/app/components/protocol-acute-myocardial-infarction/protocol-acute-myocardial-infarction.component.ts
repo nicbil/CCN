@@ -146,28 +146,30 @@ export class ProtocolAcuteMyocardialInfarctionComponent implements OnInit {
   autocompleteControl: FormControl = new FormControl();
   responseAfterSave: object = {};
   progressSpinnerActive: boolean = false;
-  segmentsOfMyocardialContractility: any = {
-    0: {'top': 32, 'm_left': 93, position: 0},
-    1: {'top': 32, 'm_left': 181, position: 1},
-    2: {'top': 127, 'm_left': 130, position: 11},
-    3: {'top': 120, 'm_left': 75, position: 15},
-    4: {'top': 80, 'm_left': 112, position: 16},
-    5: {'top': 100, 'm_left': 25, position: 17},
-    6: {'top': 80, 'm_left': 169, position: 2},
-    7: {'top': 127, 'm_left': 156, position: 10},
-    8: {'top': 116, 'm_left': 204, position: 4},
-    9: {'top': 100, 'm_left': 257, position: 3},
-    10: {'top': 184, 'm_left': 27, position: 18},
-    11: {'top': 167, 'm_left': 78, position: 13},
-    12: {'top': 156, 'm_left': 129, position: 12},
-    13: {'top': 200, 'm_left': 118, position: 14},
-    14: {'top': 255, 'm_left': 96, position: 19},
-    15: {'top': 157, 'm_left': 157, position: 9},
-    16: {'top': 200, 'm_left': 168, position: 8},
-    17: {'top': 255, 'm_left': 189, position: 7},
-    18: {'top': 167, 'm_left': 203, position: 5},
-    19: {'top': 185, 'm_left': 256, position: 6}
-  };
+
+  /*1,2,7,8,12 - Передебоковая*/
+  /*13,14,15,16 - Верхушечная*/
+  /*3,4,9,10 - Перегородочная*/
+  /*5,6,11 - Нижняя*/
+  /*4,5 - Заднебоковая*/
+  segmentsOfMyocardialContractility: any = [
+    {'top': 20, 'm_left': 141},
+    {'top': 101, 'm_left': 263},
+    {'top': 196, 'm_left': 258},
+    {'top': 278, 'm_left': 141},
+    {'top': 196, 'm_left': 25},
+    {'top': 101, 'm_left': 19},
+    {'top': 70, 'm_left': 141},
+    {'top': 121, 'm_left': 219},
+    {'top': 177, 'm_left': 215},
+    {'top': 228, 'm_left': 141},
+    {'top': 177, 'm_left': 67},
+    {'top': 120, 'm_left': 64},
+    {'top': 120, 'm_left': 167},
+    {'top': 170, 'm_left': 167},
+    {'top': 170, 'm_left': 116},
+    {'top': 120, 'm_left': 116},
+  ];
 
   dataCircle = [
     {'title': 'lang_149', 'color': '#7cf17c'},
@@ -198,7 +200,6 @@ export class ProtocolAcuteMyocardialInfarctionComponent implements OnInit {
   }
 
   setColor(sector, position) {
-    --sector;
     this._renderer.setElementStyle(this.segments.nativeElement.children[position], 'fill',
       (this.dataCircle[sector] && this.dataCircle[sector]['color']) ? this.dataCircle[sector]['color'] : '#fd9fb3');
   }

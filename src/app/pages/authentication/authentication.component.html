@@ -1,0 +1,19 @@
+<div class="auth-form">
+  <form #authForm="ngForm" (ngSubmit)="saveForm(authForm)">
+    <mat-form-field class="">
+      <input matInput [(ngModel)]="auth.username"
+             name="username"
+             type="text"
+             placeholder="{{'lang_153' | translate}}">
+    </mat-form-field>
+
+    <mat-form-field class="">
+      <input matInput [(ngModel)]="auth.password"
+             name="password"
+             type="password"
+             placeholder="{{'lang_154' | translate}}">
+    </mat-form-field>
+
+    <button class='btn btn-primary auth-button'>{{'lang_155' | translate}}</button>
+  </form>
+</div>

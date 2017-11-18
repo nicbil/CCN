@@ -23,6 +23,7 @@ import { ViewProtocolWithAcuteMyocardialInfarctionComponent } from './components
 import { ProtocolAcuteMyocardialInfarctionComponent } from './components/protocol-acute-myocardial-infarction/protocol-acute-myocardial-infarction.component';
 import { UpdateProtocolWithAcuteMyocardialInfarctionComponent } from './pages/update-protocol-with-acute-myocardial-infarction/update-protocol-with-acute-myocardial-infarction.component';
 import { ObjNgForPipe } from './shared/obj-ng-for.pipe';
+import { AuthenticationComponent } from './pages/authentication/authentication.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ObjNgForPipe } from './shared/obj-ng-for.pipe';
     ViewProtocolWithAcuteMyocardialInfarctionComponent,
     ProtocolAcuteMyocardialInfarctionComponent,
     UpdateProtocolWithAcuteMyocardialInfarctionComponent,
-    ObjNgForPipe
+    ObjNgForPipe,
+    AuthenticationComponent,
   ],
   imports: [
     NgbModule.forRoot(),

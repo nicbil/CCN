@@ -20,23 +20,20 @@ class ApiController extends ActiveController {
   public $modelClass = 'app\models\Api';
 
   public function actionAuth() {
+    $post = json_decode(trim(file_get_contents('php://input')), true);
     $model = new LoginForm();
+    $auth = array('LoginForm' => $post);
 
-    $auth = array(
-      'LoginForm' => array(
-        'username' => 'Nicholas',
-        'password' => '123456',
-        'rememberMe' => 1
-      )
-    );
+    //print_r($post); die('');
+    //$class = $this->identityClass;
+    //$identity = $class::findIdentityByAccessToken($token, $type);
 
     if ($model->load($auth) && $model->login()) {
-      return ['0'=> true];
+      return ['success'=> true];
     } else {
-      return ['0'=> false];
+      return ['success'=> false];
     }
   }
-
 
   public function actionGet_protocols_infarction_st() {
     $searchModel = new AcuteMyocardialInfarctionStSearch();
@@ -211,5 +208,9 @@ class ApiController extends ActiveController {
     }
 
     AcuteMyocardialInfarctionSt::updateAll(['parent_ids' => $parent_ids], ['=', 'id', $parentId]);
+  }
+
+  public static function findIdentityByAccessToken($token, $type = null) {
+    return static::findOne(['auth_key' => $token]);
   }
 }

@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'patronymic')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'birthday_date')->textInput() ?>
+    <?= $form->field($model, 'birthday')->textInput() ?>
 
     <?= $form->field($model, 'gender')->dropDownList([ 'man' => 'Man', 'woman' => 'Woman', '' => '', ], ['prompt' => '']) ?>
 

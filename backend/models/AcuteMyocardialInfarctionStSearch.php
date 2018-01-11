@@ -19,7 +19,7 @@ class AcuteMyocardialInfarctionStSearch extends AcuteMyocardialInfarctionSt
     {
         return [
             [['id'], 'integer'],
-            [['date_and_time_of_arrival', 'first_name', 'last_name', 'patronymic', 'birthday_date', 'gender', 'delivered', 'effect_of_thrombolysis', 'thrombolysis', 'ecg', 'time_intervals', 'continuing_pain', 'increase_segment_st', 'thrombaspiration', 'additionally', 'type_interventions', 'lka', 'pka', 'lvg', 'operator', 'date_and_time_of_death', 'killip_type', 'blood_timi_before', 'blood_timi_after', 'stenosis_diameter_ica_before_chkv', 'stenosis_diameter_ica_after_chkv'], 'safe'],
+            [['admission_time_to_hospital', 'first_name', 'last_name', 'patronymic', 'birthday', 'gender', 'delivered', 'effect_of_thrombolysis', 'thrombolysis', 'ecg', 'time_intervals', 'continuing_pain', 'increase_segment_st', 'thrombaspiration', 'additionally', 'type_interventions', 'lka', 'pka', 'lvg', 'operator', 'date_and_time_of_death', 'killip_type', 'blood_timi_before', 'blood_timi_after', 'stenosis_diameter_ica_before_chkv', 'stenosis_diameter_ica_after_chkv'], 'safe'],
         ];
     }
 
@@ -60,8 +60,8 @@ class AcuteMyocardialInfarctionStSearch extends AcuteMyocardialInfarctionSt
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'date_and_time_of_arrival' => $this->date_and_time_of_arrival,
-            'birthday_date' => $this->birthday_date,
+            'admission_time_to_hospital' => $this->admission_time_to_hospital,
+            'birthday' => $this->birthday,
             'killip_type' => $this->killip_type,
             'blood_timi_before' => $this->blood_timi_before,
             'blood_timi_after' => $this->blood_timi_after,

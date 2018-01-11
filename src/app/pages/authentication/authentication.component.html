@@ -14,6 +14,9 @@
              placeholder="{{'lang_154' | translate}}">
     </mat-form-field>
 
+    <div *ngIf="result && !result.success" class="error-message">
+      {{'lang_234' | translate}}
+    </div>
     <button class='btn btn-primary auth-button'>{{'lang_155' | translate}}</button>
   </form>
 </div>

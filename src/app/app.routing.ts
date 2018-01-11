@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { IndexComponent } from './pages/index/index.component';
-import { CreateProtocolWithAcuteMyocardialInfarctionComponent } from './pages/create-protocol-with-acute-myocardial-infarction/create-protocol-with-acute-myocardial-infarction.component';
-import { UpdateProtocolWithAcuteMyocardialInfarctionComponent } from './pages/update-protocol-with-acute-myocardial-infarction/update-protocol-with-acute-myocardial-infarction.component';
+import { CreateInfarctionComponent } from './pages/create-infarction/create-infarction.component';
+import { UpdateInfarctionComponent } from './pages/update-infarction/update-infarction.component';
 import { AuthenticationComponent } from './pages/authentication/authentication.component';
-import { AuthGuard } from "./auth.guard";
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [{
     path: '',
@@ -12,14 +12,14 @@ const routes: Routes = [{
     component: IndexComponent,
     canActivate: [AuthGuard]
   }, {
-    path: 'create_protocol_with_acute_myocardial_infarction',
+    path: 'create_infarction',
     pathMatch: 'full',
-    component: CreateProtocolWithAcuteMyocardialInfarctionComponent,
+    component: CreateInfarctionComponent,
     canActivate: [AuthGuard]
   }, {
-    path: 'update_protocol_with_acute_myocardial_infarction',
+    path: 'update_infarction',
     pathMatch: 'full',
-    component: UpdateProtocolWithAcuteMyocardialInfarctionComponent,
+    component: UpdateInfarctionComponent,
     canActivate: [AuthGuard]
   }, {
     path: 'authentication',
@@ -27,7 +27,7 @@ const routes: Routes = [{
     component: AuthenticationComponent
   }, {
     path: '**',
-    redirectTo: 'create_protocol_with_acute_myocardial_infarction',
+    redirectTo: 'create_infarction',
     canActivate: [AuthGuard]
   }
 ];
@@ -42,5 +42,5 @@ export class AppRoutingModule {}
 
 export const routingComponents = [
     IndexComponent,
-    CreateProtocolWithAcuteMyocardialInfarctionComponent
+    CreateInfarctionComponent
 ];

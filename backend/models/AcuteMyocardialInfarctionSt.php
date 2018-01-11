@@ -8,12 +8,11 @@ use Yii;
  * This is the model class for table "acute_myocardial_infarction_st".
  *
  * @property integer $id
- * @property string $arrival_date
- * @property string $arrival_time
+ * @property string $admission_time_to_hospital
  * @property string $first_name
  * @property string $last_name
  * @property string $patronymic
- * @property string $birthday_date
+ * @property string $birthday
  * @property string $gender
  * @property string $delivered_smp
  * @property string $delivered_yourself
@@ -54,16 +53,17 @@ class AcuteMyocardialInfarctionSt extends \yii\db\ActiveRecord
     public function rules()
     {
       return [
-        [['date_and_time_of_arrival', 'first_name', 'last_name', 'patronymic', 'birthday_date', 'killip_type', 'ecg',
+        [['admission_time_to_hospital', 'first_name', 'last_name', 'patronymic', 'birthday', 'killip_type', 'ecg',
           'stenosis_diameter_ica_before_chkv', 'stenosis_diameter_ica_after_chkv'], 'required'],
         [['id', 'killip_type', 'blood_timi_before', 'blood_timi_after', 'stenosis_diameter_ica_before_chkv',
           'stenosis_diameter_ica_after_chkv', 'parent_id'], 'integer'],
-        [['date_and_time_of_arrival', 'birthday_date', 'date_and_time_of_death'], 'safe'],
+        [['admission_time_to_hospital', 'birthday', 'date_and_time_of_death'], 'safe'],
         [['gender', 'delivered', 'effect_of_thrombolysis', 'thrombolysis', 'ecg', 'time_intervals', 'continuing_pain',
           'increase_segment_st', 'thrombaspiration', 'additionally', 'type_interventions', 'lka', 'pka', 'lvg', 'fv',
           'cause_of_death', 'operator', 'parent_ids', 'address', 'cd', 'ad', 'aortic_valve_or_prosthesis',
           'mitral_valve_or_prosthesis', 'pulmonary_artery_valve', 'three_leaf_valve', 'aorta', 'left_atrium',
-          'left_ventricle', 'myocardial_contractility'], 'string'],
+          'left_ventricle', 'myocardial_contractility', 'lvg_active', 'polyclinic', 'general_blood_analysis',
+          'biochemistry', 'test_substance'], 'string'],
         [['first_name', 'last_name', 'patronymic', 'phone'], 'string', 'max' => 100],
       ];
     }
@@ -80,7 +80,7 @@ class AcuteMyocardialInfarctionSt extends \yii\db\ActiveRecord
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
             'patronymic' => 'Patronymic',
-            'birthday_date' => 'Birthday Date',
+            'birthday' => 'Birthday Date',
             'gender' => 'Gender',
             'delivered_smp' => 'Delivered Smp',
             'delivered_yourself' => 'Delivered Yourself',
@@ -101,8 +101,10 @@ class AcuteMyocardialInfarctionSt extends \yii\db\ActiveRecord
             'lka' => 'Lka',
             'pka' => 'Pka',
             'lvg' => 'Lvg',
+            'lvg_active' => 'Lvg switch',
             'operator' => 'Operator',
             'date_time_death' => 'Date Time Death',
+            'polyclinic' => 'polyclinic'
         ];
     }
 }

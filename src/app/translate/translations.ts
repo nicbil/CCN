@@ -1,11 +1,11 @@
 // app/translate/translation.ts
-import { OpaqueToken } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
 // import translations
 import { LANG_EN_TRANS } from './lang-en';
 import { LANG_RU_TRANS } from './lang-ru';
 // translation token
-export const TRANSLATIONS = new OpaqueToken('translations');
+export const TRANSLATIONS = new InjectionToken('translations');
 
 // all traslations
 const dictionary = {

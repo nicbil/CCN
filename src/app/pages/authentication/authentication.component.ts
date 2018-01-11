@@ -14,6 +14,8 @@ export class AuthenticationComponent implements OnInit {
     'password': '123456',
     'rememberMe': '1'
   };
+
+  public result: object;
   constructor(private httpService: HttpService, private router: Router) { }
 
   ngOnInit() {
@@ -23,11 +25,11 @@ export class AuthenticationComponent implements OnInit {
     console.log(data.form._value);
     this.httpService.Http(this.auth, 'auth')
       .subscribe(res => {
+        this.result = res;
         if (res.success) {
           //localStorage.setItem('auth', JSON.stringify({'user':'1'}));
           localStorage.setItem('auth', '1');
           this.router.navigate(['/']);
-        } else {
         }
       });
   }

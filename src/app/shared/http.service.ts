@@ -1,7 +1,7 @@
 import { Injectable, Renderer, ElementRef } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -9,7 +9,7 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class HttpService {
-  constructor(private http: Http, private router: Router, private renderer: Renderer, private elementRef: ElementRef) {}
+  constructor(private http: Http ) {}
 
   mapResponse = (res) => {
     return res.json();

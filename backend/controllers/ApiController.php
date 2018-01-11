@@ -24,7 +24,7 @@ class ApiController extends ActiveController {
     $model = new LoginForm();
     $auth = array('LoginForm' => $post);
 
-    //print_r($post); die('');
+   // print_r(EVENT_BEFORE_VALIDATE); die('');
     //$class = $this->identityClass;
     //$identity = $class::findIdentityByAccessToken($token, $type);
 
@@ -46,8 +46,8 @@ class ApiController extends ActiveController {
 
   public function actionCreate_protocol_infarction_st() {
     $post = json_decode(trim(file_get_contents('php://input')), true);
-    $post['birthday_date'] = !empty($post['birthday_date']) ?
-      \Yii::$app->formatter->asDate($post['birthday_date'], 'php:Y-m-d') : '00-00-00';
+    $post['birthday'] = !empty($post['birthday']) ?
+      \Yii::$app->formatter->asDate($post['birthday'], 'php:Y-m-d') : '00-00-00';
 
     if(!empty($post['id'])) {
       $parentId = $post['id'];
@@ -58,7 +58,7 @@ class ApiController extends ActiveController {
       unset($post['id']);
     }
 
-    foreach (['date_and_time_of_arrival', 'date_and_time_of_death'] as $field) {
+    foreach (['admission_time_to_hospital', 'date_and_time_of_death'] as $field) {
       if(!empty($post[$field])) {
         $date_time = explode(' ', $post[$field]);
         $post[$field] = \Yii::$app->formatter->asDate($date_time[1], 'php:Y-m-d') . ' ' . $date_time[0] . ':00';
@@ -109,23 +109,23 @@ class ApiController extends ActiveController {
     if(!empty($post['fields']['date_and_time_of_arrival_from'])) {
       $date_and_time_of_arrival_from = \Yii::$app->formatter->asDate($post['fields']['date_and_time_of_arrival_from'], 'php:Y-m-d');
 
-      $query->where(['>=', 'date_and_time_of_arrival', $date_and_time_of_arrival_from]);
+      $query->where(['>=', 'admission_time_to_hospital', $date_and_time_of_arrival_from]);
     }
 
     if(!empty($post['fields']['date_and_time_of_arrival_before'])) {
       $date_and_time_of_arrival_before = \Yii::$app->formatter->asDate($post['fields']['date_and_time_of_arrival_before'], 'php:Y-m-d').' 23:59:59';
 
-      $query->andWhere(['<=', 'date_and_time_of_arrival', $date_and_time_of_arrival_before]);
+      $query->andWhere(['<=', 'admission_time_to_hospital', $date_and_time_of_arrival_before]);
     }
 
     if(!empty($post['fields']['birthday_date_from'])) {
       $birthday_date_from = \Yii::$app->formatter->asDate($post['fields']['birthday_date_from'], 'php:Y-m-d');
-      $query->where(['>=', 'birthday_date', $birthday_date_from]);
+      $query->where(['>=', 'birthday', $birthday_date_from]);
     }
 
     if(!empty($post['fields']['birthday_date_before'])) {
       $birthday_date_before = \Yii::$app->formatter->asDate($post['fields']['birthday_date_before'], 'php:Y-m-d').' 23:59:59';
-      $query->andWhere(['<=', 'birthday_date', $birthday_date_before]);
+      $query->andWhere(['<=', 'birthday', $birthday_date_before]);
     }
 
     if(!empty($post['fields']['effect_of_thrombolysis'])) {

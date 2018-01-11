@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'first_name',
             'last_name',
             // 'patronymic',
-            // 'birthday_date',
+            // 'birthday',
             // 'gender',
             // 'delivered_smp:ntext',
             // 'delivered_yourself:ntext',

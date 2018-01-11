@@ -13,11 +13,11 @@ class m171023_114730_acute_myocardial_infarction_st extends Migration
 
         $this->createTable('{{%acute_myocardial_infarction_st}}', [
             'id' => 'int(11) PRIMARY KEY AUTO_INCREMENT',
-            'date_and_time_of_arrival' => 'datetime NULL DEFAULT NULL',
+            'admission_time_to_hospital' => 'datetime NULL DEFAULT NULL',
             'first_name' => 'varchar(100) NOT NULL',
             'last_name' => 'varchar(100) NOT NULL',
             'patronymic' => 'varchar(100) NOT NULL',
-            'birthday_date' => 'date NULL DEFAULT NULL',
+            'birthday' => 'date NULL DEFAULT NULL',
             'gender' => "enum('man','woman','','') NOT NULL",
             'delivered' => 'text NOT NULL',
             'killip_type' => 'varchar(2) NOT NULL',
@@ -37,6 +37,7 @@ class m171023_114730_acute_myocardial_infarction_st extends Migration
             'lka' => 'text NOT NULL',
             'pka' => 'text NOT NULL',
             'lvg' => 'text NOT NULL',
+            'lvg_active' => 'varchar(1) NOT NULL',
             'fv' => 'text NOT NULL',
             'cause_of_death' => 'text NOT NULL',
             'operator' => 'text NOT NULL',
@@ -55,6 +56,10 @@ class m171023_114730_acute_myocardial_infarction_st extends Migration
             'myocardial_contractility' => 'text NOT NULL',
             'parent_id' => 'int(11)',
             'parent_ids' => 'text NOT NULL',
+            'polyclinic' => 'text NOT NULL',
+            'general_blood_analysis' => 'text NOT NULL',
+            'biochemistry' => 'text NOT NULL',
+            'test_substance' => 'text NOT NULL'
         ], $tableOptions);
     }
 

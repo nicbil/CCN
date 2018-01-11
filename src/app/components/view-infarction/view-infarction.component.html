@@ -1,0 +1,137 @@
+<div class="wrap-filter">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{'lang_65' | translate}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <form class="filter" #filterForm="ngForm" (ngSubmit)="showTable(filterForm)">
+      <div class="filter__fields">
+        <div>
+          <span>{{'lang_67' | translate}}</span>
+          <mat-form-field class="input-date">
+            <input matInput [(ngModel)]='filter.date_and_time_of_arrival_from' id="date_and_time_of_arrival_from"
+                   name="date_and_time_of_arrival_from"
+                   #arrival_date="ngModel"
+                   placeholder="{{'lang_66' | translate}}"
+                   [textMask]="{mask: dataService.maskDate}"
+                   [pattern]="dataService.patternDate">
+          </mat-form-field>
+        </div>
+
+        <div>
+          <span>{{'lang_68' | translate}}</span>
+          <mat-form-field class="input-date">
+            <input matInput [(ngModel)]='filter.date_and_time_of_arrival_before' id="date_and_time_of_arrival_before"
+                   name="date_and_time_of_arrival_before"
+                   #arrival_date="ngModel"
+                   placeholder="{{'lang_66' | translate}}"
+                   [textMask]="{mask: dataService.maskDate}"
+                   [pattern]="dataService.patternDate">
+          </mat-form-field>
+        </div>
+
+        <div class="group-checkbox">
+          <div class="filter__title">{{'gender' | translate}}</div>
+          <mat-checkbox [(ngModel)]="filter.gender['man']" name="man">
+            {{'man' | translate}}
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="filter.gender['woman']" name="woman">
+            {{'women' | translate}}
+          </mat-checkbox>
+        </div>
+
+        <div>
+          <span>{{'lang_67' | translate}}</span>
+          <mat-form-field class="input-date">
+            <input matInput [(ngModel)]='filter.birthday_date_from' id="birthday_date_from"
+                   name="birthday_date_from"
+                   #arrival_date="ngModel"
+                   placeholder="{{'birthday' | translate}}"
+                   [textMask]="{mask: dataService.maskDate}"
+                   [pattern]="dataService.patternDate">
+          </mat-form-field>
+
+          <span>{{'lang_68' | translate}}</span>
+          <mat-form-field class="input-date">
+            <input matInput [(ngModel)]='filter.birthday_date_before' id="birthday_date_before"
+                   name="birthday_date_before"
+                   #arrival_date="ngModel"
+                   placeholder="{{'birthday' | translate}}"
+                   [textMask]="{mask: dataService.maskDate}"
+                   [pattern]="dataService.patternDate">
+          </mat-form-field>
+        </div>
+
+        <div class="group-checkbox">
+          <div class="filter__title">{{'lang_54' | translate}}</div>
+          <mat-checkbox [(ngModel)]="filter.effect_of_thrombolysis['no']" name="effect_of_thrombolysis_no">
+            {{'lang_49' | translate}}
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="filter.effect_of_thrombolysis['yes']" name="effect_of_thrombolysis_yes">
+            {{'lang_50' | translate}}
+          </mat-checkbox>
+        </div>
+
+        <mat-form-field>
+          <mat-select placeholder="{{'fv' | translate}}" [(ngModel)]="filter.fv" name="fv" multiple="true">
+            <mat-option value="30"><=30</mat-option>
+            <mat-option value="40">30-40</mat-option>
+            <mat-option value="50">40-50</mat-option>
+            <mat-option value="70">50-70</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="filter__buttons">
+        <button class='btn btn-secondary' (click)="resetFilter(filterForm)">{{'lang_73' | translate}}</button>
+        <button class='btn btn-primary' (click)="showTable(filterForm)">{{'lang_105' | translate}}</button>
+      </div>
+    </form>
+  </mat-expansion-panel>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+    </canvas>
+  </div>
+</div>
+<br><br><br>
+
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="{{field}}" *ngFor="let field of displayedColumns">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{field | translate}} </mat-header-cell>
+
+      <ng-container *ngIf="field !== 'controls'">
+        <mat-cell *matCellDef="let row"> {{ tableRow(row, field)}} </mat-cell>
+      </ng-container>
+
+      <ng-container *ngIf="field === 'controls'">
+        <mat-cell *matCellDef="let row">
+          <a href="/update_infarction?id={{row['id']}}">
+            <i class="material-icons">&#xE254;</i>
+          </a>
+        </mat-cell>
+      </ng-container>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+   [length]="pageLength"
+   [pageIndex]="pageIndex"
+   [pageSize]="pageSize"
+   [pageSizeOptions]="pageSizeOptions">
+  </mat-paginator>
+</div>

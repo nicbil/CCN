@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'patronymic') ?>
 
-    <?php // echo $form->field($model, 'birthday_date') ?>
+    <?php // echo $form->field($model, 'birthday') ?>
 
     <?php // echo $form->field($model, 'gender') ?>
 
